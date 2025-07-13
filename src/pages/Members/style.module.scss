@@ -1,0 +1,42 @@
+@use '../../global';
+
+.tableHeader{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--mainColor);
+    padding-top: 20px;
+}
+
+.headerTitles{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.headerMainTitle{
+    color: var(--mainColor);
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.headerSecondTitle{
+    color: var(--mainColor);
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.filterIcon{
+    }
+
+.filterButton{
+    border: none;
+    background-color: white;
+    cursor: pointer;
+    color: var(--mainColor);
+}
+
+.mainTable{
+    background-color: white;
+}
