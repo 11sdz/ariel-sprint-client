@@ -3,4 +3,10 @@
 
 .mainContent{
     background-color: var(--backroundColor);
+    width: 100%;
+}
+
+.layoutComponent{
+    display: flex;
+    flex-direction: row;
 }

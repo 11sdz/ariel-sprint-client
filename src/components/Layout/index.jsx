@@ -6,7 +6,7 @@ import styles from './style.module.scss';
 
 export default function Layout() {
   return (
-    <div>
+    <div className={styles.layoutComponent}>
         <Navbar/>
         <main className={styles.mainContent}>
             <Outlet/>

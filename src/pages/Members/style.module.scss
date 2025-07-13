@@ -1,6 +1,13 @@
 @use '../../global';
 
-.tableHeader{
+.membersPage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tableHeader {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -9,34 +16,67 @@
     padding-top: 20px;
 }
 
-.headerTitles{
+.headerTitles {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    align-items: flex-start;
 }
 
-.headerMainTitle{
+.headerMainTitle {
     color: var(--mainColor);
     font-size: 30px;
     font-weight: bold;
 }
 
-.headerSecondTitle{
+.headerSecondTitle {
     color: var(--mainColor);
     font-size: 20px;
     font-weight: 500;
 }
 
-.filterIcon{
-    }
-
-.filterButton{
+.filterButton {
     border: none;
     background-color: white;
     cursor: pointer;
     color: var(--mainColor);
 }
 
-.mainTable{
+.mainTable {
     background-color: white;
+    width: 80%;
+    border-radius: 20px;
+}
+
+// .tableContainer {
+//     overflow-y: auto;
+//     display: block;
+//     height: 600px;
+// }
+
+.tableWrapper {
+    max-height: 600px;
+    overflow-y: auto;
+    width: 100%;
+    border-radius: 20px;
+}
+
+.tableContainer {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+
+th,
+td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    z-index: 2;
 }
