@@ -1,0 +1,47 @@
+.circleImage {
+  display: flex;
+  height: 5rem;
+  width: 5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  background-image: linear-gradient(
+    to bottom right,
+    #3b82f6,   // blue-500
+    #10b981    // emerald-500
+  );
+  color: white;
+  font-size: 2rem; // text-2xl equivalent
+  font-weight: 600;
+  user-select: none;
+}
+
+.profileCard {
+  display: flex;        // enable flexbox
+  align-items: center;     // center vertically
+  padding:10px;
+  width: 15rem;
+  height: 20rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  flex-direction: column;
+  background-color: #ffffff;
+}
+
+.nameText{
+  font-size:1.5rem;
+  font-weight: 600;
+}
+
+.details{
+  color: #727272;
+}
+
+.link{
+  font-size: 1rem;
+  color: #0000fb;
+
+  &:hover {
+    cursor:pointer;
+  }
+}
