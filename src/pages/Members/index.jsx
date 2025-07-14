@@ -3,12 +3,12 @@ import { MdPeopleAlt } from 'react-icons/md';
 import SearchBar from '../../components/SearchBar';
 import styles from './style.module.scss';
 import { FaFilter } from 'react-icons/fa';
-import { getInitials } from '../../utils/Profile/profileUtils';
 import MembersTable from '../../components/MembersTable';
+// import FilterDrawer from '../../components/FilterDrawer';
 
 export default function index() {
     const [query, setQuery] = useState('');
-    const [initials, setInitials] = useState(getInitials(name));
+
 
     return (
         <div className={styles.membersPage}>
@@ -26,11 +26,14 @@ export default function index() {
                     <div>
                         <SearchBar query={query} setQuery={setQuery} />
                     </div>
+                    
                     <button className={styles.filterButton}>
                         <FaFilter className={styles.filterIcon} />
                     </button>
                 </div>
                 <MembersTable/>
+                {/* <FilterDrawer isOpen={isOpen} onClose={onClose} /> */}
+
             </div>
         </div>
     );

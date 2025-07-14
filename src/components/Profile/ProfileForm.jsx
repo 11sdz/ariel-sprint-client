@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./style.module.scss";
 
 export default function ProfileForm({ formData, setFormData }) {
+    
     const [isEditEnabled, setIsEditEnabled] = useState(true);
     function handleChange(e) {
         const name = e.target.name; // e.g. "location.country"
