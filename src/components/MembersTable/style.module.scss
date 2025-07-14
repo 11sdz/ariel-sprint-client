@@ -1,11 +1,5 @@
 @use '../../global';
 
-.membersPage {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
 .tableHeader {
     display: flex;
@@ -14,34 +8,6 @@
     justify-content: space-between;
     color: var(--mainColor);
     padding-top: 20px;
-}
-
-.headerTitles {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    align-items: flex-start;
-    padding: 15px;
-}
-
-.headerMainTitle {
-    color: var(--mainColor);
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.headerSecondTitle {
-    color: var(--mainColor);
-    font-size: 20px;
-    font-weight: 500;
-}
-
-.filterButton {
-    border: none;
-    background-color: white;
-    cursor: pointer;
-    color: var(--mainColor);
 }
 
 .mainTable {
@@ -77,14 +43,38 @@ th {
     z-index: 2;
 }
 
-.nameContainer{
+.memberContainer{
     display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+}
+
+.memberContainer{
     flex-direction: row;
     gap: 10px;
 }
 
-.profileImg{
-    // font-size: 10px;
-    // width: 10px;
-    // height: 10px;
+.memberData{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.secondTd{
+    font-size: 12px;
+    font-weight: 200;
+    color: gray;
+}
+
+.locationMember{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+    color: var(--grayColor);
+}
+
+.locationIcon{
+    color:rgb(148 163 184);
 }

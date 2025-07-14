@@ -1,0 +1,27 @@
+.searchBarContainer {
+    border: 1px solid transparent;
+    width: 400px;
+    outline: none;
+    padding: 10px;
+    border-radius: 15px;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 5px;
+
+    &:focus-within{
+        border: 1px solid gray;
+    }
+}
+
+.searchIcon{
+    font-size: 13px;
+    color: gray;
+}
+
+.searchInput {
+    outline: none;
+    border: none;
+    font-size: 15px;
+    width: 100%;
+}

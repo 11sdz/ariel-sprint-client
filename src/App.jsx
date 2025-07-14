@@ -9,10 +9,11 @@ import Register from './pages/Register'
 import Connections from './pages/Connections'
 import Discover from './pages/Discover'
 import AiMatching from './pages/AiMatching'
+import { Box } from '@mui/material';
 
 export default function App() {
     return (
-        <div>
+        <Box>
             <BrowserRouter>
                 <Routes>
                     <Route path='/login' element={<Login />} />
@@ -28,6 +29,6 @@ export default function App() {
                     </Route>
                 </Routes>
             </BrowserRouter>
-        </div>
+        </Box>
     );
 }
