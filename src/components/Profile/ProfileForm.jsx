@@ -1,23 +1,34 @@
 import React, { useState } from "react";
 import styles from "./style.module.scss";
-import Button from '@mui/material/Button';
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import { Box, Icon, IconButton, MenuItem, TextField } from "@mui/material";
+import { BsBorderWidth } from "react-icons/bs";
 
 export default function ProfileForm({ formData, setFormData }) {
+    
     const [isEditEnabled, setIsEditEnabled] = useState(true);
     function handleChange(e) {
-        const name = e.target.name; // e.g. "location.country"
+        const name = e.target.name; // e.g. "jobHistory.0.jobTitle"
         const value = e.target.value;
 
         if (name.includes(".")) {
-            const keys = name.split("."); // ["location", "country"]
+            const keys = name.split("."); // ['jobHistory', '0', 'jobTitle']
 
-            setFormData((prev) => ({
-                ...prev,
-                [keys[0]]: {
-                    ...prev[keys[0]],
-                    [keys[1]]: value,
-                },
-            }));
+            setFormData((prev) => {
+                const updated = { ...prev };
+
+                let pointer = updated;
+                for (let i = 0; i < keys.length - 1; i++) {
+                    const key = keys[i];
+                    if (!pointer[key]) {
+                        pointer[key] = isNaN(Number(keys[i + 1])) ? {} : [];
+                    }
+                    pointer = pointer[key];
+                }
+
+                pointer[keys[keys.length - 1]] = value;
+                return updated;
+            });
         } else {
             setFormData((prev) => ({
                 ...prev,
@@ -27,89 +38,147 @@ export default function ProfileForm({ formData, setFormData }) {
     }
 
     return (
-        <div className={styles.profileForm}>
-            <Button variant={"contained"} onClick={() => setIsEditEnabled(!isEditEnabled)}>
-                {isEditEnabled ? "Disable Edit" : "Enable Edit"}
-            </Button>
-            <form>
-                <input
-                    type="text"
-                    name="fullName"
-                    placeholder="Full Name"
-                    value={formData.fullName}
-                    onChange={handleChange}
-                    disabled={!isEditEnabled}
-                />
+        <Box className={styles.formContainer}>
+            <Box
+                sx={{
+                    color: "black",
+                    margin: 1,
+                }}
+            >
+                <IconButton onClick={() => setIsEditEnabled(!isEditEnabled)}>
+                    <EditNoteIcon fontSize="large" />
+                </IconButton>
+            </Box>
+            <Box className={styles.profileForm}>
+                <Box
+                    component={"form"}
+                    sx={{
+                        display: "grid",
+                        gridTemplateColumns: "repeat(2, 1fr)",
+                        flexDirection: "column",
+                        gap: 2,
+                    }}
+                >
+                    <TextField
+                        variant="outlined"
+                        type="text"
+                        name="fullName"
+                        label="Full Name"
+                        value={formData.fullName}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                    />
 
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    disabled={!isEditEnabled}
-                />
+                    <TextField
+                        select
+                        label="Gender"
+                        name="gender"
+                        value={formData.gender}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                        fullWidth
+                    >
+                        <MenuItem value="">Don't mention</MenuItem>
+                        <MenuItem value="Male">Male</MenuItem>
+                        <MenuItem value="Female">Female</MenuItem>
+                    </TextField>
 
-                <input
-                    type="phone"
-                    name="phone"
-                    placeholder="Phone Number"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    disabled={!isEditEnabled}
-                />
+                    <TextField
+                        type="email"
+                        name="email"
+                        label="Email" // acts as placeholder and label
+                        value={formData.email}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                        variant="outlined" // optional, default is outlined
+                    />
 
-                <input
-                    type="text"
-                    name="linkedinURL"
-                    placeholder="Linkedin Profile"
-                    value={formData.linkedinURL}
-                    onChange={handleChange}
-                    disabled={!isEditEnabled}
-                />
+                    <TextField
+                        variant="outlined"
+                        type="phone"
+                        name="phone"
+                        label="Phone Number"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                    />
+                    <TextField
+                        variant="outlined"
+                        type="text"
+                        name="location.country"
+                        label="Country"
+                        value={formData.location.country}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                    />
 
-                <input
-                    type="text"
-                    name="facebookURL"
-                    placeholder="Facebook Profile"
-                    value={formData.facebookURL}
-                    onChange={handleChange}
-                    disabled={!isEditEnabled}
-                />
+                    <TextField
+                        variant="outlined"
+                        type="text"
+                        name="location.city"
+                        label="City"
+                        value={formData.location.city}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                    />
 
-                <input
-                    type="text"
-                    name="location.country"
-                    placeholder="Country"
-                    value={formData.location.country}
-                    onChange={handleChange}
-                    disabled={!isEditEnabled}
-                />
+                    <TextField
+                        variant="outlined"
+                        type="text"
+                        name="linkedinURL"
+                        label="Linkedin Profile"
+                        value={formData.linkedinURL}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                    />
 
-                <input
-                    type="text"
-                    name="location.state"
-                    placeholder="State"
-                    value={formData.location.state}
-                    onChange={handleChange}
-                    disabled={!isEditEnabled}
-                />
+                    <TextField
+                        variant="outlined"
+                        type="text"
+                        name="facebookURL"
+                        label="Facebook Profile"
+                        value={formData.facebookURL}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                    />
 
-                <input
-                    type="text"
-                    name="location.city"
-                    placeholder="City"
-                    value={formData.location.city}
-                    onChange={handleChange}
-                    disabled={!isEditEnabled}
-                />
+                    <TextField
+                        variant="outlined"
+                        type="text"
+                        name="jobHistory.0.jobTitle"
+                        label="Job Title"
+                        value={formData.jobHistory[0].jobTitle}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                    />
 
-                <select value={formData.gender} name="gender" onChange={handleChange} disabled={!isEditEnabled}>
-                    <option value="">Don't mention</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                </select>
-            </form>
-        </div>
+                    <TextField
+                        variant="outlined"
+                        type="text"
+                        name="jobHistory.0.companyName"
+                        label="Company"
+                        value={formData.jobHistory[0].companyName}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                    />
+                </Box>
+                <Box>
+                    <TextField
+                        variant="outlined"
+                        type="text"
+                        name="additionalInfo"
+                        label="Bio"
+                        value={formData.additionalInfo}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                        multiline={true}
+                        rows={2}
+                        sx={{ marginTop: 2, width: "50%" }}
+                        maxRows={2}
+                        inputProps={{ maxLength: 120 }} // limits total characters
+                    />
+                </Box>
+            </Box>
+        </Box>
     );
 }
