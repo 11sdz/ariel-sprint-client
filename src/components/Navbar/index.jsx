@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import {
@@ -106,7 +107,6 @@ export default function Navbar() {
             <IconButton onClick={() => setExpanded(!expanded)} sx={{ mb: 2 }}>
                 <MenuIcon />
             </IconButton>
-
             {navbarItems.map((item, index) => (
                 <NavLink
                     key={index}

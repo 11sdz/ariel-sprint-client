@@ -9,7 +9,9 @@ import Register from './pages/Register'
 import Connections from './pages/Connections'
 import Discover from './pages/Discover'
 import AiMatching from './pages/AiMatching'
+
 import { Box, useMediaQuery, useTheme } from '@mui/material';
+
 
 export default function App() {
     const theme = useTheme();
