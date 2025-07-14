@@ -6,6 +6,7 @@ import { getInitials } from "../../utils/Profile/profileUtils";
 
 export default function ProfileImage({ fullName }) {
 
+  
 return (
   <span
     className={styles.circleImage}
