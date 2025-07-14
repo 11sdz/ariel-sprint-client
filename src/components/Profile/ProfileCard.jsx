@@ -29,7 +29,7 @@ export default function ProfileCard({ profileData }) {
     // experties
     return (
         <div className={styles.profileCard}>
-            <ProfileImage gradient={profileGradient} />
+            <ProfileImage gradient={profileGradient}/>
             <span className={styles.nameText}>{profileData.fullName}</span>
             <span className={styles.details}>{profileData.email}</span>
             <span className={styles.details}>
