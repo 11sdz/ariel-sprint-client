@@ -25,7 +25,7 @@ export default function ProfileCard({ profileData }) {
             >
                 {!flipped ? (
                     <>
-                        <ProfileImage fullName={profileData.fullName} />
+                        {profileData.fullName && <ProfileImage fullName={profileData.fullName} />}
                         <Box
                             sx={{
                                 padding: 3,

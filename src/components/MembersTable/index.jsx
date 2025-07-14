@@ -29,6 +29,7 @@ export default function MembersTable({ membersResult }) {
                                             <div className={styles.profileImg}>
                                                 <ProfileImage
                                                     initials={getInitials(item.fullName)}
+                                                    src={item.profileImage}
                                                     width={'25px'}
                                                     height={'25px'}
                                                     fontSize={'25px'}
@@ -46,8 +47,8 @@ export default function MembersTable({ membersResult }) {
                                                 <BsSuitcaseLg />
                                             </div>
                                             <div className={styles.memberData}>
-                                                {item.jobs_history[0].companyName}
-                                                <div className={styles.secondTd}>{item.jobs_history[0].role}</div>
+                                                {item.jobHistory[0].companyName}
+                                                <div className={styles.secondTd}>{item.jobHistory[0].jobTitle}</div>
                                             </div>
                                         </div>
                                     </td>
