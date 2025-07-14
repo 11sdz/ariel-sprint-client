@@ -2,9 +2,17 @@
 
 .membersPage {
     display: flex;
+    flex-direction: row;
+}
+
+.innerPage {
+    display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+     align-items: center;
+}
+
+.sidebar{
+    width: 100%;
 }
 
 .tableHeader {
@@ -42,6 +50,12 @@
     background-color: white;
     cursor: pointer;
     color: var(--mainColor);
+    padding: 20px;
+}
+
+.filterIcon {
+    width: 15px;
+    height: 15px;
 }
 
 .mainTable {
@@ -77,14 +91,20 @@ th {
     z-index: 2;
 }
 
-.nameContainer{
+.nameContainer {
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
 
-.profileImg{
-    // font-size: 10px;
-    // width: 10px;
-    // height: 10px;
+.memberDirectory{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding-left: 10px;
+}
+
+.searchBar{
+    padding: 10px;
 }

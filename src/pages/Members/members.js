@@ -1,83 +1,152 @@
 export const members = [
-    {
-      member: { name: "Alice Johnson", email: "alice.johnson@example.com" },
-      company: "TechCorp Solutions",
-      role: "Senior Product Manager",
-      location: "San Francisco, CA",
-      expertise: "Product Management",
-      status: "active",
+  {
+    fullName: "Liam Cohen",
+    email: "liam.cohen@example.com",
+    location: {
+      country: "Israel",
+      state: "Tel Aviv District",
+      city: "Tel Aviv"
     },
-    {
-      member: { name: "Bob Smith", email: "bob.smith@example.com" },
-      company: "InnovateX",
-      role: "Lead Software Engineer",
-      location: "New York, NY",
-      expertise: "User Experience",
-      status: "active",
+    phone: "+972-54-123-4567",
+    linkedinURL: "https://linkedin.com/in/liamcohen",
+    facebookURL: "https://facebook.com/liam.cohen",
+    wantsUpdates: true,
+    gender: "Male",
+    additionalInfo: "Active in tech meetups and open source.",
+    jobs_history: [
+      {
+        role: "Frontend Developer",
+        companyName: "Techly",
+        startDate: "2020-06-01",
+        endDate: "Present"
+      },
+      {
+        role: "Junior Developer",
+        companyName: "CodeBase",
+        startDate: "2018-01-01",
+        endDate: "2020-05-31"
+      }
+    ],
+    years_of_experience: 5,
+    groups: ['Engineering', 'Product Management', 'UX Research']
+  },
+  {
+    fullName: "Noa Levi",
+    email: "noa.levi@example.com",
+    location: {
+      country: "Israel",
+      state: "Jerusalem District",
+      city: "Jerusalem"
     },
-    {
-      member: { name: "Carol Lee", email: "carol.lee@example.com" },
-      company: "FutureSoft",
-      role: "UX Designer",
-      location: "Austin, TX",
-      expertise: "User Experience",
-      status: "inactive",
+    phone: "+972-52-987-6543",
+    linkedinURL: "https://linkedin.com/in/noalevi",
+    facebookURL: "https://facebook.com/noa.levi",
+    wantsUpdates: false,
+    gender: "Female",
+    additionalInfo: "Passionate about user research and accessibility.",
+    jobs_history: [
+      {
+        role: "UX Designer",
+        companyName: "Designify",
+        startDate: "2018-03-15",
+        endDate: "Present"
+      }
+    ],
+    years_of_experience: 6,
+    groups: ['Marketing', 'Sales', 'Public Relations', 'Business Development']
+  },
+  {
+    fullName: "Yarden Mizrahi",
+    email: "yarden.mizrahi@example.com",
+    location: {
+      country: "Israel",
+      state: "Haifa District",
+      city: "Haifa"
     },
-    {
-      member: { name: "David Kim", email: "david.kim@example.com" },
-      company: "NextGen Labs",
-      role: "Product Owner",
-      location: "Seattle, WA",
-      expertise: "Product Management",
-      status: "active",
+    phone: "+972-50-456-7890",
+    linkedinURL: "https://linkedin.com/in/yardenmiz",
+    facebookURL: "https://facebook.com/yarden.mizrahi",
+    wantsUpdates: true,
+    gender: "Non-binary",
+    additionalInfo: "Interested in sustainable tech solutions.",
+    jobs_history: [
+      {
+        role: "Product Manager",
+        companyName: "EcoSoft",
+        startDate: "2019-01-10",
+        endDate: "Present"
+      },
+      {
+        role: "Business Analyst",
+        companyName: "MarketSense",
+        startDate: "2016-07-01",
+        endDate: "2018-12-31"
+      }
+    ],
+    years_of_experience: 7,
+    groups: ['Finance', 'Human Resources', 'Legal', 'Administration']
+  },
+  {
+    fullName: "Daniel Azulay",
+    email: "daniel.azulay@example.com",
+    location: {
+      country: "Israel",
+      state: "Central District",
+      city: "Rishon LeZion"
     },
-    {
-      member: { name: "Eva Martinez", email: "eva.martinez@example.com" },
-      company: "BrightTech",
-      role: "Senior UX Researcher",
-      location: "Boston, MA",
-      expertise: "User Experience",
-      status: "active",
+    phone: "+972-58-321-7890",
+    linkedinURL: "https://linkedin.com/in/danazulay",
+    facebookURL: "https://facebook.com/daniel.azulay",
+    wantsUpdates: false,
+    gender: "Male",
+    additionalInfo: "Volunteers with youth coding bootcamps.",
+    jobs_history: [
+      {
+        role: "Fullstack Engineer",
+        companyName: "WebCore",
+        startDate: "2017-09-01",
+        endDate: "Present"
+      },
+      {
+        role: "Backend Developer",
+        companyName: "DataStream",
+        startDate: "2014-05-01",
+        endDate: "2017-08-31"
+      }
+    ],
+    years_of_experience: 9,
+    groups: ['IT', 'Security', 'QA / Testing', 'Operations']
+  },
+  {
+    fullName: "Tamar Ben-David",
+    email: "tamar.bendavid@example.com",
+    location: {
+      country: "Israel",
+      state: "Northern District",
+      city: "Nazareth"
     },
-    {
-      member: { name: "Frank Wilson", email: "frank.wilson@example.com" },
-      company: "InnovateX",
-      role: "Software Engineer",
-      location: "Denver, CO",
-      expertise: "Product Management",
-      status: "inactive",
-    },
-    {
-      member: { name: "Grace Chen", email: "grace.chen@example.com" },
-      company: "TechCorp Solutions",
-      role: "Product Manager",
-      location: "San Francisco, CA",
-      expertise: "Product Management",
-      status: "active",
-    },
-    {
-      member: { name: "Henry Patel", email: "henry.patel@example.com" },
-      company: "NextGen Labs",
-      role: "UX Designer",
-      location: "Seattle, WA",
-      expertise: "User Experience",
-      status: "active",
-    },
-    {
-      member: { name: "Isabel Gomez", email: "isabel.gomez@example.com" },
-      company: "BrightTech",
-      role: "Product Manager",
-      location: "Boston, MA",
-      expertise: "Product Management",
-      status: "inactive",
-    },
-    {
-      member: { name: "Jack Brown", email: "jack.brown@example.com" },
-      company: "FutureSoft",
-      role: "Lead UX Designer",
-      location: "Austin, TX",
-      expertise: "User Experience",
-      status: "active",
-    },
-  ];
-  
+    phone: "+972-53-234-6789",
+    linkedinURL: "https://linkedin.com/in/tamarbd",
+    facebookURL: "https://facebook.com/tamar.bendavid",
+    wantsUpdates: true,
+    gender: "Female",
+    additionalInfo: "Speaks at community events regularly.",
+    jobs_history: [
+      {
+        role: "Data Analyst",
+        companyName: "InsightData",
+        startDate: "2021-05-01",
+        endDate: "Present"
+      },
+      {
+        role: "Research Assistant",
+        companyName: "TechResearch",
+        startDate: "2019-02-01",
+        endDate: "2021-04-30"
+      }
+    ],
+    years_of_experience: 4,
+    groups: ['Customer Success', 'Support', 'Training', 'Logistics']
+  }
+];
+

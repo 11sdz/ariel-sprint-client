@@ -5,6 +5,7 @@ import { Box, Icon, IconButton, MenuItem, TextField } from "@mui/material";
 import { BsBorderWidth } from "react-icons/bs";
 
 export default function ProfileForm({ formData, setFormData }) {
+    
     const [isEditEnabled, setIsEditEnabled] = useState(true);
     function handleChange(e) {
         const name = e.target.name; // e.g. "jobHistory.0.jobTitle"

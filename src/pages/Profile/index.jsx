@@ -30,6 +30,10 @@ export default function Index() {
                 description: "",
             },
         ],
+        jobs_history: [{role: "", companyName: "", startDate: "", endDate: ""}],
+        years_of_experience: 0,
+        wantsUpdates: false,
+        groups: []
     });
     return (
         <Box sx={{display:'flex',alignItems:isMobile? 'center': 'center', flexDirection: isMobile ? 'column' : 'column', gap: 2, padding: 2}}>
