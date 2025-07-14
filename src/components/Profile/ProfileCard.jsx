@@ -23,7 +23,7 @@ export default function ProfileCard() {
     // experties
     return (
         <div className={styles.profileCard}>
-            <ProfileImage src={imageSrc} initials={initials} />
+            <ProfileImage src={imageSrc} initials={initials}/>
             <span className={styles.nameText}>{name}</span>
             <span className={styles.details}>{email}</span>
             <span className={styles.details}>{location}</span>
