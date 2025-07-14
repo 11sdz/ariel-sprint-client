@@ -33,7 +33,21 @@
   background-color: #ffffff;
 }
 
+
+.formContainer {
+  display: flex;        // enable flexbox
+  justify-content: center;
+  align-content: center;
+  padding:10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  flex-direction: column;
+  background-color: #ffffff;
+}
 .profileForm{
+  margin-top: 10px;
   display: flex;        // enable flexbox
   align-items: baseline;     // center vertically
   justify-content: center;
@@ -42,23 +56,21 @@
   width: 75%;
   height: 75%;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   flex-direction: column;
-  background-color: #ffffff;
   margin-left: 20px;
 
-  input,select,option{
-    border-style: solid;
-    height: 2rem;
-    width: 20%;
-    border-radius: 12px;
-    border-width: 2px;
-    border-color: var(--grayColor);
-    padding-block: 4px;
-    padding-inline: 10px;
-    margin-inline: 3px;
-    margin-block: 3px;
-  }
+  // input,select,option{
+  //   border-style: solid;
+  //   height: 2rem;
+  //   width: 20%;
+  //   border-radius: 12px;
+  //   border-width: 2px;
+  //   border-color: var(--grayColor);
+  //   padding-block: 4px;
+  //   padding-inline: 10px;
+  //   margin-inline: 3px;
+  //   margin-block: 3px;
+  // }
 }
 
 .doubleForm{

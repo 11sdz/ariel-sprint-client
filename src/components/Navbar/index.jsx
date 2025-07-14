@@ -1,36 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Box, Drawer, Stack, Typography } from '@mui/material';
+import {
+  Box,
+  IconButton,
+  Typography,
+  useMediaQuery,
+  useTheme,
+  Tooltip,
+} from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import PeopleIcon from '@mui/icons-material/People';
+import AccountBoxIcon from '@mui/icons-material/AccountBox';
+import LinkIcon from '@mui/icons-material/Link';
+import ExploreIcon from '@mui/icons-material/Explore';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+
+const navbarItems = [
+  { label: "Dashboard", href: "/", icon: <DashboardIcon /> },
+  { label: "Members", href: "/members", icon: <PeopleIcon /> },
+  { label: "Profile", href: "/profile", icon: <AccountBoxIcon /> },
+  { label: "Connections", href: "/connections", icon: <LinkIcon /> },
+  { label: "Discover", href: "/discover", icon: <ExploreIcon /> },
+  { label: "AI Matching", href: "/aiMatching", icon: <AutoAwesomeIcon /> },
+];
 
 export default function Navbar() {
-  const navbarItems = [
-    { label: "Dashboard", href: "/" },
-    { label: "Members", href: "/members" },
-    { label: "Profile", href: "/profile" },
-    { label: "Connections", href: "/connections" },
-    { label: "Discover", href: "/discover" },
-    { label: "AI Matching", href: "/aiMatching" },
-  ];
+  const [expanded, setExpanded] = useState(true);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const sidebarWidth = expanded ? 200 : 64;
 
   return (
-    <Box 
+    <Box
       component="nav"
       sx={{
-        width: '15vw',
         height: '100vh',
-        bgcolor: 'white',
-        borderRadius: '10px',
+        width: sidebarWidth,
+        bgcolor: '#fff',
         p: 2,
         boxShadow: 4,
         display: 'flex',
         flexDirection: 'column',
-        gap: 1,
+        transition: 'width 0.3s',
+        position: isMobile ? 'fixed' : 'relative',
+        zIndex: 1200,
       }}
     >
-      <Drawer
-        variant="permanent"
-        anchor='left'
-        >
+      {/* Toggle Button */}
+      {!isMobile && (
+        <IconButton onClick={() => setExpanded(!expanded && !isMobile)} sx={{ mb: 2 }}>
+          <MenuIcon />
+        </IconButton>
+      )}
+
+      {/* Navigation Items */}
       {navbarItems.map((item, index) => (
         <NavLink
           key={index}
@@ -39,32 +64,50 @@ export default function Navbar() {
           style={({ isActive }) => ({
             textDecoration: 'none',
           })}
+          onClick={() => {
+            if (!isMobile) {
+              setExpanded(false);
+            }
+          }}
         >
           {({ isActive }) => (
-            <Box
-              sx={{
-                px: 2,
-                py: 1,
-                borderRadius: '25px',
-                fontWeight: isActive ? 'bold' : 'normal',
-                bgcolor: isActive
-                  ? 'linear-gradient(to right, #003366, #3399FF)'
-                  : 'transparent',
-                color: isActive ? 'white' : 'black',
-                boxShadow: isActive ? 3 : 'none',
-                transition: '0.3s',
-                '&:hover': {
-                  boxShadow: 4,
-                  color: 'black',
-                },
-              }}
-            >
-              <Typography variant="body1">{item.label}</Typography>
-            </Box>
+            <Tooltip title={!expanded ? item.label : ''} placement="right" >
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  //justifyContent: 'center',
+                  alignContent: 'center',
+                  gap: 2,
+                  px: 0,
+                  py: 1,
+                  mb: 1,
+                  borderRadius: '25px',
+                  fontWeight: isActive ? 'bold' : 'normal',
+                  backgroundImage: isActive
+                    ? 'linear-gradient(to right, #003366, #3399FF)'
+                    : 'transparent',
+                  color: isActive ? 'white' : 'black',
+                  cursor: 'pointer',
+                  boxShadow: isActive ? 3 : 'none',
+                  transition: '0.3s',
+                  '&:hover': {
+                    boxShadow: 4,
+                    color: 'black',
+                  },
+                }}
+              >
+                {React.cloneElement(item.icon,{
+                  sx: {
+                    marginLeft: expanded ? 1 : 0.5,
+                  }
+                })}
+                {expanded && <Typography sx={{ color: isActive ? 'white' : 'black', variant: "body1" }}>{item.label}</Typography>}
+              </Box>
+            </Tooltip>
           )}
         </NavLink>
       ))}
-      </Drawer>
     </Box>
   );
 }
