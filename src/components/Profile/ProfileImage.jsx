@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styles from "./style.module.scss"
 
 
+
 export default function ProfileImage({ gradient }) {
   const bgGradient = gradient.gender === 'Female'
   ? 'linear-gradient(to bottom right, #ec4899, #FFFA8D)'
