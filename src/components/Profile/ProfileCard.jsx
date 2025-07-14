@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProfileImage from "./ProfileImage";
 import styles from "./style.module.scss";
 import { getInitials } from "../../utils/Profile/profileUtils";
 
-export default function ProfileCard() {
-    const [name, setName] = useState("Alice Bob");
-    const [email, setEmail] = useState("johnDoe@gmail.com");
-    const [location, setLocation] = useState("Pikesville, MD");
-    const [linkedin, setLinkedin] = useState("Linkedin profile");
-    const [imageSrc, setImageSrc] = useState(""); // empty for fallback initials
-    const [initials, setInitials] = useState(getInitials(name));
+export default function ProfileCard({ profileData }) {
+    const [profileGradient, setProfileGradient] = useState({
+        initials: "",
+        gender: profileData.gender,
+    });
+
+    useEffect(() => {
+        setProfileGradient((prev) => ({
+            ...prev,
+            initials: getInitials(profileData.fullName),
+            gender: profileData.gender, // optional: update gender if it changes
+        }));
+    }, [profileData.fullName, profileData.gender]);
 
     // profileName,
     // phone,
@@ -23,11 +29,15 @@ export default function ProfileCard() {
     // experties
     return (
         <div className={styles.profileCard}>
-            <ProfileImage src={imageSrc} initials={initials}/>
-            <span className={styles.nameText}>{name}</span>
-            <span className={styles.details}>{email}</span>
-            <span className={styles.details}>{location}</span>
-            <span className={styles.link}>{linkedin}</span>
+            <ProfileImage gradient={profileGradient} />
+            <span className={styles.nameText}>{profileData.fullName}</span>
+            <span className={styles.details}>{profileData.email}</span>
+            <span className={styles.details}>
+                {profileData.location.country}
+                {", "}
+                {profileData.location.city}
+            </span>
+            <span className={styles.link}>{profileData.linkedinURL}</span>
         </div>
     );
 }
