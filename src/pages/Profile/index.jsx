@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProfileCard from "../../components/Profile/ProfileCard";
 import styles from "./style.module.scss";
 import ProfileForm from "../../components/Profile/ProfileForm";
+import { Box } from "@mui/material";
 
 export default function Index() {
     const [profileForm, setProfileForm] = useState({
@@ -16,9 +17,9 @@ export default function Index() {
         additionalInfo: "",
     });
     return (
-        <div className={styles.root}>
+        <Box className={styles.root}>
             <ProfileCard profileData={profileForm} />
             <ProfileForm formData={profileForm} setFormData={setProfileForm} />
-        </div>
+        </Box>
     );
 }
