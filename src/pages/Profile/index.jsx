@@ -21,10 +21,18 @@ export default function Index() {
         additionalInfo: "",
         experties:'',
         interests: "",
-        position: "",
+        jobHistory: [
+            {
+                jobTitle: "",
+                companyName: "",
+                startDate: "",
+                endDate: "",
+                description: "",
+            },
+        ],
     });
     return (
-        <Box sx={{display:'flex', flexDirection: isMobile ? 'column' : 'row', gap: 2, padding: 2}}>
+        <Box sx={{display:'flex',alignItems:isMobile? 'center': 'center', flexDirection: isMobile ? 'column' : 'column', gap: 2, padding: 2}}>
             <ProfileCard profileData={profileForm} />
             <ProfileForm formData={profileForm} setFormData={setProfileForm} />
         </Box>

@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 import styles from "./style.module.scss";
-import Button from "@mui/material/Button";
-import { Box, MenuItem, TextField } from "@mui/material";
+import EditNoteIcon from "@mui/icons-material/EditNote";
+import { Box, Icon, IconButton, MenuItem, TextField } from "@mui/material";
+import { BsBorderWidth } from "react-icons/bs";
 
 export default function ProfileForm({ formData, setFormData }) {
     const [isEditEnabled, setIsEditEnabled] = useState(true);
     function handleChange(e) {
-        const name = e.target.name; // e.g. "location.country"
+        const name = e.target.name; // e.g. "jobHistory.0.jobTitle"
         const value = e.target.value;
 
         if (name.includes(".")) {
-            const keys = name.split("."); // ["location", "country"]
+            const keys = name.split("."); // ['jobHistory', '0', 'jobTitle']
 
-            setFormData((prev) => ({
-                ...prev,
-                [keys[0]]: {
-                    ...prev[keys[0]],
-                    [keys[1]]: value,
-                },
-            }));
+            setFormData((prev) => {
+                const updated = { ...prev };
+
+                let pointer = updated;
+                for (let i = 0; i < keys.length - 1; i++) {
+                    const key = keys[i];
+                    if (!pointer[key]) {
+                        pointer[key] = isNaN(Number(keys[i + 1])) ? {} : [];
+                    }
+                    pointer = pointer[key];
+                }
+
+                pointer[keys[keys.length - 1]] = value;
+                return updated;
+            });
         } else {
             setFormData((prev) => ({
                 ...prev,
@@ -29,13 +38,16 @@ export default function ProfileForm({ formData, setFormData }) {
 
     return (
         <Box className={styles.formContainer}>
-            <Button
-                variant={"contained"}
-                onClick={() => setIsEditEnabled(!isEditEnabled)}
+            <Box
+                sx={{
+                    color: "black",
+                    margin: 1,
+                }}
             >
-                {isEditEnabled ? "Disable Edit" : "Enable Edit"}
-            </Button>
-
+                <IconButton onClick={() => setIsEditEnabled(!isEditEnabled)}>
+                    <EditNoteIcon fontSize="large" />
+                </IconButton>
+            </Box>
             <Box className={styles.profileForm}>
                 <Box
                     component={"form"}
@@ -57,6 +69,20 @@ export default function ProfileForm({ formData, setFormData }) {
                     />
 
                     <TextField
+                        select
+                        label="Gender"
+                        name="gender"
+                        value={formData.gender}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                        fullWidth
+                    >
+                        <MenuItem value="">Don't mention</MenuItem>
+                        <MenuItem value="Male">Male</MenuItem>
+                        <MenuItem value="Female">Female</MenuItem>
+                    </TextField>
+
+                    <TextField
                         type="email"
                         name="email"
                         label="Email" // acts as placeholder and label
@@ -72,6 +98,25 @@ export default function ProfileForm({ formData, setFormData }) {
                         name="phone"
                         label="Phone Number"
                         value={formData.phone}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                    />
+                    <TextField
+                        variant="outlined"
+                        type="text"
+                        name="location.country"
+                        label="Country"
+                        value={formData.location.country}
+                        onChange={handleChange}
+                        disabled={!isEditEnabled}
+                    />
+
+                    <TextField
+                        variant="outlined"
+                        type="text"
+                        name="location.city"
+                        label="City"
+                        value={formData.location.city}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                     />
@@ -99,9 +144,9 @@ export default function ProfileForm({ formData, setFormData }) {
                     <TextField
                         variant="outlined"
                         type="text"
-                        name="location.country"
-                        label="Country"
-                        value={formData.location.country}
+                        name="jobHistory.0.jobTitle"
+                        label="Job Title"
+                        value={formData.jobHistory[0].jobTitle}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                     />
@@ -109,36 +154,28 @@ export default function ProfileForm({ formData, setFormData }) {
                     <TextField
                         variant="outlined"
                         type="text"
-                        name="location.state"
-                        label="State"
-                        value={formData.location.state}
+                        name="jobHistory.0.companyName"
+                        label="Company"
+                        value={formData.jobHistory[0].companyName}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                     />
-
+                </Box>
+                <Box>
                     <TextField
                         variant="outlined"
                         type="text"
-                        name="location.city"
-                        label="City"
-                        value={formData.location.city}
+                        name="additionalInfo"
+                        label="Bio"
+                        value={formData.additionalInfo}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
+                        multiline={true}
+                        rows={2}
+                        sx={{ marginTop: 2, width: "50%" }}
+                        maxRows={2}
+                        inputProps={{ maxLength: 120 }} // limits total characters
                     />
-
-                    <TextField
-                        select
-                        label="Gender"
-                        name="gender"
-                        value={formData.gender}
-                        onChange={handleChange}
-                        disabled={!isEditEnabled}
-                        fullWidth
-                    >
-                        <MenuItem value="">Don't mention</MenuItem>
-                        <MenuItem value="Male">Male</MenuItem>
-                        <MenuItem value="Female">Female</MenuItem>
-                    </TextField>
                 </Box>
             </Box>
         </Box>
