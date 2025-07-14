@@ -14,6 +14,10 @@ export default function Index() {
         wantsUpdates: false,
         gender: "",
         additionalInfo: "",
+        jobs_history: [{role: "", companyName: "", startDate: "", endDate: ""}],
+        years_of_experience: 0,
+        wantsUpdates: false,
+        groups: []
     });
     return (
         <div className={styles.root}>
