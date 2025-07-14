@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
-import styles from './style.module.scss';
-import { getInitials } from '../../utils/Profile/profileUtils';
+import React, { useState } from "react";
+import styles from "./style.module.scss";
+import { getInitials } from "../../utils/Profile/profileUtils";
+import { Avatar, Typography } from "@mui/material";
 
-export default function ProfileImage({ fullName, width, height, fontSize }) {
+export default function ProfileImage({ height, fullName }) {
     return (
-        <span
-            style={{ width: width, height: height, fontSize: fontSize }}
-            className={styles.circleImage}
-            aria-label={`Profile initials ${getInitials(fullName)}`}
+        <Avatar
+            className={styles.profileImage}
+            sx={{
+                width: height || 150,
+                height: height || 150,
+                alignItems: "center",
+                backgroundImage:'linear-gradient(#3b82f6, #10b981)'
+            }}
+            alt={fullName}
+            src="/broken-link.jpg"
+            
         >
-            {getInitials(fullName)}
-        </span>
+            <Typography variant="h3">{getInitials(fullName)}</Typography>
+        </Avatar>
     );
 }

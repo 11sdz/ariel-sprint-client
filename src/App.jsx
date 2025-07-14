@@ -9,10 +9,14 @@ import Register from './pages/Register'
 import Connections from './pages/Connections'
 import Discover from './pages/Discover'
 import AiMatching from './pages/AiMatching'
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 export default function App() {
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    
     return (
-        <div>
+        <Box component="main" sx={{paddingBottom: isMobile ? '70px' : '0px'}}>
             <BrowserRouter>
                 <Routes>
                     <Route path='/login' element={<Login />} />
@@ -28,6 +32,6 @@ export default function App() {
                     </Route>
                 </Routes>
             </BrowserRouter>
-        </div>
+        </Box>
     );
 }

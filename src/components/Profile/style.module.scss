@@ -23,42 +23,42 @@
 
 .profileCard {
   display: flex;        // enable flexbox
-  align-items: center;     // center vertically
-  padding:10px;
-  width: 15rem;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  width: 450px;
   height: 15rem;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-  flex-direction: column;
-  background-color: #ffffff;
+  flex-direction: row;
+  background-image: linear-gradient(to bottom right,#F8F8F8 35%, #E5E0D8);
+  cursor: pointer;
 }
 
-.profileForm{
+
+.formContainer {
+  position: relative;
   display: flex;        // enable flexbox
-  align-items: baseline;     // center vertically
-  justify-content: center;
-  align-content: center;
   padding:10px;
-  width: 75%;
-  height: 75%;
+  width: 90%;
+  height: 100%;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   flex-direction: column;
   background-color: #ffffff;
-  margin-left: 20px;
-
-  input,select,option{
-    border-style: solid;
-    height: 2rem;
-    width: 20%;
-    border-radius: 12px;
-    border-width: 2px;
-    border-color: var(--grayColor);
-    padding-block: 4px;
-    padding-inline: 10px;
-    margin-inline: 3px;
-    margin-block: 3px;
-  }
+  margin-top: 20px;
+}
+.profileForm{
+  margin-top: 10px;
+  display: flex;        // enable flexbox
+  justify-content: center;
+  align-content: center;
+  width: 100%;
+  padding:10px;
+  height: 75%;
+  border-radius: 10px;
+  flex-direction: column;
 }
 
 .doubleForm{
@@ -71,7 +71,7 @@
 }
 
 .details{
-  color: #727272;
+  color: #213555;
 }
 
 .link{
