@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styles from "./style.module.scss";
+import Button from '@mui/material/Button';
 
 export default function ProfileForm({ formData, setFormData }) {
     const [isEditEnabled, setIsEditEnabled] = useState(true);
@@ -27,9 +28,9 @@ export default function ProfileForm({ formData, setFormData }) {
 
     return (
         <div className={styles.profileForm}>
-            <button onClick={() => setIsEditEnabled(!isEditEnabled)}>
+            <Button variant={"contained"} onClick={() => setIsEditEnabled(!isEditEnabled)}>
                 {isEditEnabled ? "Disable Edit" : "Enable Edit"}
-            </button>
+            </Button>
             <form>
                 <input
                     type="text"
@@ -103,7 +104,7 @@ export default function ProfileForm({ formData, setFormData }) {
                     disabled={!isEditEnabled}
                 />
 
-                <select value={formData.gender} name="gender" onChange={handleChange}>
+                <select value={formData.gender} name="gender" onChange={handleChange} disabled={!isEditEnabled}>
                     <option value="">Don't mention</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
