@@ -4,19 +4,9 @@ import styles from "./style.module.scss";
 import { getInitials } from "../../utils/Profile/profileUtils";
 
 export default function ProfileCard({ profileData }) {
-    const [profileGradient, setProfileGradient] = useState({
-        initials: "",
-        gender: profileData.gender,
-    });
 
-    console.log("gender",profileGradient)
 
     useEffect(() => {
-        setProfileGradient((prev) => ({
-            ...prev,
-            initials: getInitials(profileData.fullName),
-            gender: profileData.gender, // optional: update gender if it changes
-        }));
     }, [profileData.fullName, profileData.gender]);
 
     // profileName,
@@ -31,7 +21,7 @@ export default function ProfileCard({ profileData }) {
     // experties
     return (
         <div className={styles.profileCard}>
-            <ProfileImage gradient={{initials:"M D",gender:"Male"}}/>
+            <ProfileImage fullName={profileData.fullName} />
             <span className={styles.nameText}>{profileData.fullName}</span>
             <span className={styles.details}>{profileData.email}</span>
             <span className={styles.details}>

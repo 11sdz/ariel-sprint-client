@@ -3,6 +3,7 @@
   display: flex;
   height: 5rem;
   width: 5rem;
+  background-image: linear-gradient(to bottom right, #3b82f6, #10b981);
   align-items: center;
   justify-content: center;
   border-radius: 100px;
@@ -35,6 +36,8 @@
 .profileForm{
   display: flex;        // enable flexbox
   align-items: baseline;     // center vertically
+  justify-content: center;
+  align-content: center;
   padding:10px;
   width: 75%;
   height: 75%;
