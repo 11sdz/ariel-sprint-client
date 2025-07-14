@@ -1,19 +1,18 @@
 import React, { useState } from "react";
 import styles from "./style.module.scss"
+import { getInitials } from "../../utils/Profile/profileUtils";
 
 
-export default function ProfileImage({ gradient, width , height, fontSize}) {
-  const bgGradient = gradient.gender === 'Female'
-  ? 'linear-gradient(to bottom right, #ec4899, #FFFA8D)'
-  : 'linear-gradient(to bottom right, #3b82f6, #10b981)';
+
+export default function ProfileImage({ fullName }) {
 
 return (
   <span
     style={{width:width, height:height, fontSize:fontSize, backgroundImage: bgGradient}}
     className={styles.circleImage}
-    aria-label={`Profile initials ${gradient.initials}`}
+    aria-label={`Profile initials ${getInitials(fullName)}`}
   >
-    {gradient.initials}
+    {getInitials(fullName)}
   </span>
 );
 }
