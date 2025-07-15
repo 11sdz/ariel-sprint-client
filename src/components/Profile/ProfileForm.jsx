@@ -68,7 +68,7 @@ export default function ProfileForm({ formData, setFormData }) {
                     <TextField
                         variant="outlined"
                         type="text"
-                        name="fullName"
+                        name="full_name"
                         label="Full Name"
                         value={formData.full_name}
                         onChange={handleChange}
@@ -135,7 +135,7 @@ export default function ProfileForm({ formData, setFormData }) {
                     <TextField
                         variant="outlined"
                         type="text"
-                        name="location.city"
+                        name="city"
                         label="City"
                         value={formData.city}
                         onChange={handleChange}
@@ -145,7 +145,7 @@ export default function ProfileForm({ formData, setFormData }) {
                     <TextField
                         variant="outlined"
                         type="text"
-                        name="linkedinURL"
+                        name="linkedin_url"
                         label="Linkedin Profile"
                         value={formData.linkedin_url}
                         onChange={handleChange}
@@ -155,7 +155,7 @@ export default function ProfileForm({ formData, setFormData }) {
                     <TextField
                         variant="outlined"
                         type="text"
-                        name="facebookURL"
+                        name="facebook_url"
                         label="Facebook Profile"
                         value={formData.facebook_url}
                         onChange={handleChange}
@@ -165,7 +165,7 @@ export default function ProfileForm({ formData, setFormData }) {
                     <TextField
                         variant="outlined"
                         type="text"
-                        name="jobHistory.0.jobTitle"
+                        name="job_history.0.role"
                         label="Job Title"
                         value={formData.jobs_history[0]?.role}
                         onChange={handleChange}
@@ -175,7 +175,7 @@ export default function ProfileForm({ formData, setFormData }) {
                     <TextField
                         variant="outlined"
                         type="text"
-                        name="jobHistory.0.companyName"
+                        name="job_history.0.company_name"
                         label="Company"
                         value={formData.jobs_history[0]?.company_name}
                         onChange={handleChange}
@@ -186,8 +186,8 @@ export default function ProfileForm({ formData, setFormData }) {
                     <TextField
                         variant="outlined"
                         type="text"
-                        name="additionalInfo"
-                        label="Bio"
+                        name="additional_info"
+                        label="About Yourself"
                         value={formData.additional_info}
                         onChange={handleChange}
                         disabled={!isEditEnabled}

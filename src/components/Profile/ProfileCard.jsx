@@ -85,7 +85,7 @@ export default function ProfileCard({ profileData }) {
                         <span className={styles.nameText}>{profileData.full_name}</span>
 
                         <span className={styles.details} >
-                            {profileData.additional_info}
+                            {'"'}{profileData.additional_info}{'"'}
                         </span>
                         <span className={styles.link}>
                             <LinkedInIcon sx={{ my: -1 }} />
