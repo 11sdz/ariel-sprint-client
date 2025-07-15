@@ -24,6 +24,8 @@ export default function MembersTable({ membersResult }) {
         setActiveProfilePopover("");
     }
 
+    console.log(membersResult);
+    
     return (
         <div>
             {" "}
@@ -99,7 +101,7 @@ export default function MembersTable({ membersResult }) {
                                             >
                                                 <IoLocationOutline />
                                             </div>
-                                            {item.location.city}
+                                            {item.city}
                                         </div>
                                     </td>
                                     <td>

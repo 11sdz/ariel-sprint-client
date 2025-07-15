@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProfileImage from "./ProfileImage";
 import styles from "./style.module.scss";
-import { getInitials } from "../../utils/Profile/profileUtils";
 import { Box } from "@mui/material";
 import EmailIcon from "@mui/icons-material/Email";
 import LocationOnIcon from "@mui/icons-material/LocationOn";

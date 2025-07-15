@@ -3,40 +3,49 @@ import { MdPeopleAlt } from 'react-icons/md';
 import SearchBar from '../../components/SearchBar';
 import styles from './style.module.scss';
 import MembersTable from '../../components/MembersTable';
-import { members } from '../Members/members';
+// import { members } from '../Members/members';
 import FilterSidebar from '../../components/FilterSidebar';
 import { filterGroups } from '../../utils/Members/memberUtils';
+import { useApi } from '../../hooks/useApi';
 
 export default function index() {
+
+    const { data, loading, error, refetch } = useApi("/api/members");
+
+    console.log("dataaa", data)
     const [query, setQuery] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
-    const [results, setResults] = useState(members);
+    // const [isOpen, setIsOpen] = useState(false);
+    const [results, setResults] = useState([]);
     const [selectedGroups, setSelectedGroups] = useState([]);
 
     useEffect(() => {
-
-        let filtered = members
+        if (!data) {
+            setResults([]);
+            return;
+          }
+        
+        let filtered = data
 
        if (query.trim()) {
         const lowerQuery = query.toLowerCase();
         filtered = filtered.filter(
             (item) =>
-                item.fullName.toLowerCase().includes(lowerQuery) ||
+                item.full_name.toLowerCase().includes(lowerQuery) ||
                 item.email.toLowerCase().includes(lowerQuery) ||
-                item.jobs_history[0].companyName.toLowerCase().includes(lowerQuery) ||
-                item.jobs_history[0].role.toLowerCase().includes(lowerQuery) ||
-                item.location.city.toLowerCase().includes(lowerQuery)
+                item.job_history[0].company_name.toLowerCase().includes(lowerQuery) ||
+                item.job_history[0].role.toLowerCase().includes(lowerQuery) ||
+                item.city.toLowerCase().includes(lowerQuery)
         );
     }
 
     if (selectedGroups.length > 0) {
         filtered = filtered.filter(
-            (item) => item.groups && item.groups.some(group => selectedGroups.includes(group))
+            (item) => item.groups && item.groups.some(group => selectedGroups.includes(group.community_name))
         );
     }
 
         setResults(filtered);
-    }, [query, selectedGroups]);
+    }, [data, query, selectedGroups]);
 
     return (
         <div className={styles.membersPage}>
