@@ -7,11 +7,14 @@ import { IoLocationOutline } from "react-icons/io5";
 import { Box, Chip, Modal, Popover } from "@mui/material";
 import ProfileCard from "../Profile/ProfileCard";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { useNavigate } from "react-router-dom";
 
 export default function MembersTable({ membersResult }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const [openProfilePopover, setOpenCardPopover] = useState(false);
     const [activeProfilePopover, setActiveProfilePopover] = useState("");
+
+    const nav = useNavigate()
 
     function handleOpenProfilePopover(event, profile) {
         setAnchorEl(event.currentTarget); // set clicked element as anchor
@@ -24,7 +27,10 @@ export default function MembersTable({ membersResult }) {
         setActiveProfilePopover("");
     }
 
-    console.log(membersResult);
+    function handleOnClick(id) {
+        nav(`/profile/${id}`);
+    }
+    
     
     return (
         <div>
@@ -64,7 +70,7 @@ export default function MembersTable({ membersResult }) {
                                                     fontSize={"25px"}
                                                 />
                                             </div>
-                                            <div className={styles.memberData}>
+                                            <div className={styles.memberData} onClick={() => handleOnClick(item.id)}>
                                                 {item.full_name}
                                                 <div
                                                     className={styles.secondTd}
