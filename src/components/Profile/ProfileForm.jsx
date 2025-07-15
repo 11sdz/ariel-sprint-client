@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import styles from "./style.module.scss";
 import EditNoteIcon from "@mui/icons-material/EditNote";
 import { Box, Icon, IconButton, MenuItem, TextField } from "@mui/material";
+import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
+import { countries } from "./countries";
 import { BsBorderWidth } from "react-icons/bs";
 
 export default function ProfileForm({ formData, setFormData }) {
-    
-    const [isEditEnabled, setIsEditEnabled] = useState(true);
+    const [isEditEnabled, setIsEditEnabled] = useState(false);
     function handleChange(e) {
         const name = e.target.name; // e.g. "jobHistory.0.jobTitle"
         const value = e.target.value;
@@ -46,7 +47,11 @@ export default function ProfileForm({ formData, setFormData }) {
                 }}
             >
                 <IconButton onClick={() => setIsEditEnabled(!isEditEnabled)}>
-                    <EditNoteIcon fontSize="large" />
+                    {isEditEnabled ? (
+                        <DoneOutlineIcon fontSize="large" />
+                    ) : (
+                        <EditNoteIcon fontSize="large" />
+                    )}
                 </IconButton>
             </Box>
             <Box className={styles.profileForm}>
@@ -95,22 +100,36 @@ export default function ProfileForm({ formData, setFormData }) {
 
                     <TextField
                         variant="outlined"
-                        type="phone"
+                        type="tel"
                         name="phone"
                         label="Phone Number"
                         value={formData.phone}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
+                        slotProps={{
+                            htmlInput: {
+                                inputMode: "numeric", // shows number pad on mobile
+                                pattern: "[0-9]*", // restricts input to digits (0–9)
+                                /*  maxLength: 10       // optional: limit input length */
+                            }
+                        }}
                     />
                     <TextField
-                        variant="outlined"
-                        type="text"
-                        name="location.country"
+                        select
                         label="Country"
+                        name="location.country"
                         value={formData.location.country}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
-                    />
+                        fullWidth
+                    >
+                        <MenuItem value="">Don't mention</MenuItem>
+                        {countries.map((country) => (
+                            <MenuItem key={country.id} value={country.name}>
+                                {country.name}
+                            </MenuItem>
+                        ))}
+                    </TextField>
 
                     <TextField
                         variant="outlined"
