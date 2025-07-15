@@ -57,7 +57,7 @@ export default function ProfileCard({ profileData }) {
                             </span>
                             <span
                                 className={styles.details}
-                                style={{ color: "#5a5a5aff" }}
+                                style={{ color: "#4f4f4fff" }}
                             >
                                 <EmailIcon sx={{ my: -1 }} />
                                 {profileData.email}
@@ -87,28 +87,44 @@ export default function ProfileCard({ profileData }) {
                             display: "flex",
                             alignItems: "baseline",
                             transform: "scaleX(-1)",
-                            gap:0.3
+                            gap:0.3,
                         }}
                     >
                         <span className={styles.nameText}>
                             {profileData.fullName}
                         </span>
 
-                        <span className={styles.details}>
-                            {profileData.additionalInfo}
+                        <span className={styles.details} 
+                        style={{
+                                    color: "#110000ff",
+                                    fontSize: "1.1rem", // smaller text
+                                    display: "inline-flex", // align icon and text nicely
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    fontWeight:'bolder'
+                                }}>
+                            {'"'}{profileData.additionalInfo}{'"'}
                         </span>
-                        <span className={styles.link}>
+                        <span className={styles.details} style={{
+                                    color: "#082cfbff",
+                                    fontSize: "1rem", // smaller text
+                                    display: "inline-flex", // align icon and text nicely
+                                    alignItems: "center",
+                                    gap: "4px",
+                                    fontWeight:'bold'
+                                }}>
                             <LinkedInIcon sx={{ my: -1 }} />
                             {profileData.linkedinURL}
                         </span>
                                                     <span
                                 className={styles.details}
                                 style={{
-                                    color: "#5a5a5aff",
-                                    fontSize: "0.8rem", // smaller text
+                                    color: "#474747ff",
+                                    fontSize: "1rem", // smaller text
                                     display: "inline-flex", // align icon and text nicely
                                     alignItems: "center",
                                     gap: "4px",
+                                    fontWeight:'bolder'
                                 }}
                             >
                                 <PhoneIcon sx={{my:-1}}/>
