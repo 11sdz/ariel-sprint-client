@@ -23,8 +23,6 @@ export default function MembersTable({ membersResult }) {
         setOpenCardPopover(false);
         setActiveProfilePopover("");
     }
-
-    console.log(membersResult);
     
     return (
         <div>
@@ -58,14 +56,14 @@ export default function MembersTable({ membersResult }) {
                                                     initials={getInitials(
                                                         item.fullName
                                                     )}
-                                                    src={item.profileImage}
+                                                    src={item.profile_img}
                                                     width={"25px"}
                                                     height={"25px"}
                                                     fontSize={"25px"}
                                                 />
                                             </div>
                                             <div className={styles.memberData}>
-                                                {item.fullName}
+                                                {item.full_name}
                                                 <div
                                                     className={styles.secondTd}
                                                 >
@@ -82,13 +80,13 @@ export default function MembersTable({ membersResult }) {
                                                 <BsSuitcaseLg />
                                             </div>
                                             <div className={styles.memberData}>
-                                                {item.jobHistory[0].companyName}
+                                                {item.job_history[0].company_name}
                                                 <div
                                                     className={styles.secondTd}
                                                 >
                                                     {
-                                                        item.jobHistory[0]
-                                                            .jobTitle
+                                                        item.job_history[0]
+                                                            .role
                                                     }
                                                 </div>
                                             </div>
@@ -107,8 +105,8 @@ export default function MembersTable({ membersResult }) {
                                     <td>
                                         {item.groups.map((g, i) => (
                                             <Chip
-                                                key={g + i}
-                                                label={g}
+                                                key={g.community_name + i}
+                                                label={g.community_name}
                                                 size="small"
                                                 color="primary"
                                                 sx={{
