@@ -7,6 +7,8 @@ import { IoLocationOutline } from 'react-icons/io5';
 import { Chip } from '@mui/material';
 
 export default function MembersTable({ membersResult }) {
+    console.log(membersResult);
+    
     return (
         <div>
             {' '}
@@ -28,14 +30,14 @@ export default function MembersTable({ membersResult }) {
                                         <div className={styles.memberContainer}>
                                             <div className={styles.profileImg}>
                                                 <ProfileImage
-                                                    initials={getInitials(item.fullName)}
+                                                    initials={getInitials(item.full_name)}
                                                     width={'25px'}
                                                     height={'25px'}
                                                     fontSize={'25px'}
                                                 />
                                             </div>
                                             <div className={styles.memberData}>
-                                                {item.fullName}
+                                                {item.full_name}
                                                 <div className={styles.secondTd}>{item.email}</div>
                                             </div>
                                         </div>
@@ -45,10 +47,12 @@ export default function MembersTable({ membersResult }) {
                                             <div className={styles.locationIcon}>
                                                 <BsSuitcaseLg />
                                             </div>
-                                            <div className={styles.memberData}>
-                                                {item.jobs_history[0].companyName}
-                                                <div className={styles.secondTd}>{item.jobs_history[0].role}</div>
-                                            </div>
+                                            {item.job_history && item.job_history.length > 0 && (
+                                                <div className={styles.memberData}>
+                                                    {item.job_history[0].company_name}
+                                                    <div className={styles.secondTd}>{item.job_history[0].role}</div>
+                                                </div>
+                                            )}
                                         </div>
                                     </td>
                                     <td>
@@ -56,14 +60,14 @@ export default function MembersTable({ membersResult }) {
                                             <div className={styles.locationIcon}>
                                                 <IoLocationOutline />
                                             </div>
-                                            {item.location.city}
+                                            {item.city}
                                         </div>
                                     </td>
                                     <td>
                                         {item.groups.map((g, i) => (
                                             <Chip
-                                                key={g + i}
-                                                label={g}
+                                                key={g.community_name + i}
+                                                label={g.community_name}
                                                 size='small'
                                                 color='primary'
                                                 sx={{

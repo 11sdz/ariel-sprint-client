@@ -32,7 +32,6 @@ export default function Index() {
         ],
         jobs_history: [{role: "", companyName: "", startDate: "", endDate: ""}],
         years_of_experience: 0,
-        wantsUpdates: false,
         groups: []
     });
     return (
