@@ -11,7 +11,7 @@ export const dummyProfileData = {
   linkedinURL: "https://www.linkedin.com/in/alexcohen",
   facebookURL: "https://www.facebook.com/alex.cohen.dev",
   wantsUpdates: true,
-  profileImage: "https://randomuser.me/api/portraits/lego/3.jpg",
+  profileImage: "https://i.pravatar.cc/150?img=58",
   gender: "male",
   additionalInfo: "Loves building tools that make teams faster and lives easier. Big fan of clean code and TypeScript.",
   experties: "Full Stack Development, API Design, Cloud Infrastructure",

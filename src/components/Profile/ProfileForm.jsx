@@ -84,8 +84,8 @@ export default function ProfileForm({ formData, setFormData }) {
                         fullWidth
                     >
                         <MenuItem value="">Don't mention</MenuItem>
-                        <MenuItem value="Male">Male</MenuItem>
-                        <MenuItem value="Female">Female</MenuItem>
+                        <MenuItem value="male">Male</MenuItem>
+                        <MenuItem value="female">Female</MenuItem>
                     </TextField>
 
                     <TextField

@@ -26,7 +26,7 @@ export default function GenderPieChart({ data }) {
             >
                 Gender Distribution
             </Typography>
-            <ResponsiveContainer width="100%" minHeight={150} maxHeight={150}>
+            <ResponsiveContainer width="100%" minHeight={200} maxHeight={180}>
                 <PieChart>
                     <Pie
                         data={chartData}
@@ -34,7 +34,7 @@ export default function GenderPieChart({ data }) {
                         nameKey="name"
                         cx="50%"
                         cy="50%"
-                        outerRadius={60}
+                        outerRadius={80}
                         stroke="#fff"
                         strokeWidth={2}
                         label={false}
