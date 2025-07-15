@@ -7,11 +7,14 @@ import { IoLocationOutline } from "react-icons/io5";
 import { Box, Chip, Modal, Popover } from "@mui/material";
 import ProfileCard from "../Profile/ProfileCard";
 import CancelIcon from "@mui/icons-material/Cancel";
+import { useNavigate } from "react-router-dom";
 
 export default function MembersTable({ membersResult }) {
     const [anchorEl, setAnchorEl] = useState(null);
     const [openProfilePopover, setOpenCardPopover] = useState(false);
     const [activeProfilePopover, setActiveProfilePopover] = useState("");
+
+    const nav = useNavigate()
 
     function handleOpenProfilePopover(event, profile) {
         setAnchorEl(event.currentTarget); // set clicked element as anchor
@@ -24,7 +27,10 @@ export default function MembersTable({ membersResult }) {
         setActiveProfilePopover("");
     }
 
-    console.log(membersResult);
+    function handleOnClick(id) {
+        nav(`/profile/${id}`);
+    }
+    
     
     return (
         <div>
@@ -58,14 +64,14 @@ export default function MembersTable({ membersResult }) {
                                                     initials={getInitials(
                                                         item.fullName
                                                     )}
-                                                    src={item.profileImage}
+                                                    src={item.profile_img}
                                                     width={"25px"}
                                                     height={"25px"}
                                                     fontSize={"25px"}
                                                 />
                                             </div>
-                                            <div className={styles.memberData}>
-                                                {item.fullName}
+                                            <div className={styles.memberData} onClick={() => handleOnClick(item.id)}>
+                                                {item.full_name}
                                                 <div
                                                     className={styles.secondTd}
                                                 >
@@ -82,13 +88,13 @@ export default function MembersTable({ membersResult }) {
                                                 <BsSuitcaseLg />
                                             </div>
                                             <div className={styles.memberData}>
-                                                {item.jobHistory[0].companyName}
+                                                {item.job_history[0].company_name}
                                                 <div
                                                     className={styles.secondTd}
                                                 >
                                                     {
-                                                        item.jobHistory[0]
-                                                            .jobTitle
+                                                        item.job_history[0]
+                                                            .role
                                                     }
                                                 </div>
                                             </div>
@@ -107,8 +113,8 @@ export default function MembersTable({ membersResult }) {
                                     <td>
                                         {item.groups.map((g, i) => (
                                             <Chip
-                                                key={g + i}
-                                                label={g}
+                                                key={g.community_name + i}
+                                                label={g.community_name}
                                                 size="small"
                                                 color="primary"
                                                 sx={{
