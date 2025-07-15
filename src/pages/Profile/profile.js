@@ -1,27 +1,23 @@
 export const dummyProfileData = {
   id: "123",
-  fullName: "Alex Cohen",
+  full_name: "Alex Cohen",
   email: "alex.cohen@example.com",
-  location: {
-    country: "Israel",
-    state: "Central District",
-    city: "Petah Tikva"
-  },
+    city: "Petah Tikva",
   phone: "+972-52-987-6543",
-  linkedinURL: "https://www.linkedin.com/in/alexcohen",
-  facebookURL: "https://www.facebook.com/alex.cohen.dev",
+  linkedin_url: "https://www.linkedin.com/in/alexcohen",
+  facebook_url: "https://www.facebook.com/alex.cohen.dev",
   wantsUpdates: true,
-  profileImage: "https://i.pravatar.cc/150?img=58",
+  profile_img: "https://i.pravatar.cc/150?img=58",
   gender: "male",
-  additionalInfo: "Loves building tools that make teams faster and lives easier. Big fan of clean code and TypeScript.",
+  additiona_info: "Loves building tools that make teams faster and lives easier. Big fan of clean code and TypeScript.",
   experties: "Full Stack Development, API Design, Cloud Infrastructure",
   interests: "Web3, DevOps, UI/UX",
-  jobHistory: [
+  job_history: [
     {
-      jobTitle: "Full Stack Developer",
-      companyName: "NextWave Technologies",
-      startDate: "2021-06-01",
-      endDate: "2024-05-01",
+      role: "Full Stack Developer",
+      company_name: "NextWave Technologies",
+      start_date: "2021-06-01",
+      end_date: "2024-05-01",
       description: "Developed scalable applications in React and Node.js. Led frontend migration to Vite and MUI."
     }
   ],
@@ -29,8 +25,8 @@ export const dummyProfileData = {
     {
       role: "Junior Developer",
       companyName: "CodeSprint",
-      startDate: "2018-03-01",
-      endDate: "2021-05-15"
+      start_date: "2018-03-01",
+      end_date: "2021-05-15"
     }
   ],
   years_of_experience: 6,

@@ -8,6 +8,7 @@ import { BsBorderWidth } from "react-icons/bs";
 
 export default function ProfileForm({ formData, setFormData }) {
     const [isEditEnabled, setIsEditEnabled] = useState(false);
+
     function handleChange(e) {
         const name = e.target.name; // e.g. "jobHistory.0.jobTitle"
         const value = e.target.value;
@@ -69,7 +70,7 @@ export default function ProfileForm({ formData, setFormData }) {
                         type="text"
                         name="fullName"
                         label="Full Name"
-                        value={formData.fullName}
+                        value={formData.full_name}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                     />
@@ -114,11 +115,11 @@ export default function ProfileForm({ formData, setFormData }) {
                             }
                         }}
                     />
-                    <TextField
+                    {/* <TextField
                         select
                         label="Country"
                         name="location.country"
-                        value={formData.location.country}
+                        value={formData.country}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                         fullWidth
@@ -129,14 +130,14 @@ export default function ProfileForm({ formData, setFormData }) {
                                 {country.name}
                             </MenuItem>
                         ))}
-                    </TextField>
+                    </TextField> */}
 
                     <TextField
                         variant="outlined"
                         type="text"
                         name="location.city"
                         label="City"
-                        value={formData.location.city}
+                        value={formData.city}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                     />
@@ -146,7 +147,7 @@ export default function ProfileForm({ formData, setFormData }) {
                         type="text"
                         name="linkedinURL"
                         label="Linkedin Profile"
-                        value={formData.linkedinURL}
+                        value={formData.linkedin_url}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                     />
@@ -156,7 +157,7 @@ export default function ProfileForm({ formData, setFormData }) {
                         type="text"
                         name="facebookURL"
                         label="Facebook Profile"
-                        value={formData.facebookURL}
+                        value={formData.facebook_url}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                     />
@@ -166,7 +167,7 @@ export default function ProfileForm({ formData, setFormData }) {
                         type="text"
                         name="jobHistory.0.jobTitle"
                         label="Job Title"
-                        value={formData.jobHistory[0].jobTitle}
+                        value={formData.jobs_history[0]?.role}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                     />
@@ -176,7 +177,7 @@ export default function ProfileForm({ formData, setFormData }) {
                         type="text"
                         name="jobHistory.0.companyName"
                         label="Company"
-                        value={formData.jobHistory[0].companyName}
+                        value={formData.jobs_history[0]?.company_name}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                     />
@@ -187,7 +188,7 @@ export default function ProfileForm({ formData, setFormData }) {
                         type="text"
                         name="additionalInfo"
                         label="Bio"
-                        value={formData.additionalInfo}
+                        value={formData.additional_info}
                         onChange={handleChange}
                         disabled={!isEditEnabled}
                         multiline={true}
