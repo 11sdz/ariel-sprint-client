@@ -42,69 +42,21 @@ export default function Login() {
 
     window.addEventListener('message', listener);
   };
-  //  return (
-  //   <img
-  //     src={linkedin}
-  //     alt="Sign in with LinkedIn"
-  //     style={{
-  //       cursor: 'pointer',
-  //       width: 200, // או כל גודל שאתה רוצה
-  //       display: 'block',
-  //       margin: '40px auto', // מרכז את התמונה
-  //       transition: 'filter 0.2s'
-  //     }}
-  //     onClick={linkedInLogin}
-  //     onMouseOver={e => (e.currentTarget.style.filter = 'brightness(0.85)')}
-  //     onMouseOut={e => (e.currentTarget.style.filter = 'brightness(1)')}
-  //   />
-  // );
-  return <img src={linkedin} onClick={linkedInLogin} alt="Sign in with LinkedIn" style={{ cursor: 'pointer' }} />;
+   return (
+    <img
+      src={linkedin}
+      alt="Sign in with LinkedIn"
+      style={{
+        cursor: 'pointer',
+        width: 200, // או כל גודל שאתה רוצה
+        display: 'block',
+        margin: '40px auto', // מרכז את התמונה
+        transition: 'filter 0.2s'
+      }}
+      onClick={linkedInLogin}
+      onMouseOver={e => (e.currentTarget.style.filter = 'brightness(0.85)')}
+      onMouseOut={e => (e.currentTarget.style.filter = 'brightness(1)')}
+    />
+  );
+  // return <img src={linkedin} onClick={linkedInLogin} alt="Sign in with LinkedIn" style={{ cursor: 'pointer' }} />;
 }
-
-
-
-// src/pages/Login/Login.jsx
-// import React from 'react';
-// import { useLinkedIn } from 'react-linkedin-login-oauth2';
-// import linkedin from 'react-linkedin-login-oauth2/assets/linkedin.png';
-// import { useNavigate } from 'react-router-dom';
-
-// export default function Login() {
-//   const nav = useNavigate();
-//   const { linkedInLogin } = useLinkedIn({
-//     clientId: '77jh3o5tez8hde',
-//     redirectUri: 'http://localhost:5173/linkedin/callback',
-//     scope: 'openid profile email',
-
-//     onSuccess: code => {
-//       localStorage.setItem('linkedinCode', code);
-//     }
-//     //   log('הצלחנו! קיבלנו קוד:', code);
-//     //   fetch('http://localhost:4000/auth/linkedin/token', {
-//     //     method: 'POST',
-//     //     headers: { 'Content-Type': 'application/json' },
-//     //     body: JSON.stringify({ code }),
-//     //   })
-//     //     .then(r => r.json())
-//     //     .then(console.log);
-//     // },
-//     // onError: (error) => {
-//     //   console.error('שגיאה או ביטול:', error);
-//     // },
-//     // onError: error => {
-//     //   // error object looks like: { error: 'user_cancelled_login', errorMessage: 'User closed the popup' }
-//     //   console.error('LinkedIn OAuth error', error);
-
-//     //   if (error.error === 'user_cancelled_login') {
-//     //     alert('התחברות בוטלה על‑ידי המשתמש.');
-//     //   } else if (error.error === 'access_denied') {
-//     //     alert('המשתמש סירב לתת הרשאות.');
-//     //   } else {
-//     //     alert('אירעה שגיאה בהתחברות עם לינקדין, אנא נסה שוב.');
-//     //   }
-//     // },
-
-//   });
-
-//   return <img src={linkedin} onClick={linkedInLogin} alt="Sign in with LinkedIn" style={{ cursor: 'pointer' }} />;
-// }
