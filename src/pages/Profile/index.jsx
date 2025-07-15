@@ -28,7 +28,7 @@ export default function Index() {
         additional_info: '',
         experties: '',
         interests: '',
-        jobs_history: [
+        job_history: [
             {
                 role: '',
                 company_name: '',
