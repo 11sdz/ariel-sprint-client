@@ -37,7 +37,7 @@ export default function Login() {
       if (error) {
         alert('LinkedIn login failed: ' + error);
       }
-      window.removeEventListener('message', listener); // הסר מאזין
+      window.removeEventListener('message', listener); 
     };
 
     window.addEventListener('message', listener);
@@ -48,9 +48,9 @@ export default function Login() {
       alt="Sign in with LinkedIn"
       style={{
         cursor: 'pointer',
-        width: 200, // או כל גודל שאתה רוצה
+        width: 200, 
         display: 'block',
-        margin: '40px auto', // מרכז את התמונה
+        margin: '40px auto', 
         transition: 'filter 0.2s'
       }}
       onClick={linkedInLogin}

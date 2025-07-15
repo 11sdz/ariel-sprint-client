@@ -30,6 +30,7 @@ export default function App() {
                     <Route path='/' element={<Layout />}>
                         <Route index element={<Dashboard />} />
                         <Route path='/members' element={<Members />} />
+                        <Route path='/profile/:id' element={<Profile />} />
                         <Route path='/profile' element={<Profile />} />
                         <Route path='/connections' element={<Connections />} />
                         <Route path='/discover' element={<Discover />} />
