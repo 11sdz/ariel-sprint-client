@@ -3,47 +3,50 @@ import ProfileCard from '../../components/Profile/ProfileCard';
 import styles from './style.module.scss';
 import ProfileForm from '../../components/Profile/ProfileForm';
 import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { dummyProfileData } from './profile';
 import { useParams } from 'react-router-dom';
+import { useApi } from '../../hooks/useApi';
 
 export default function Index() {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const { id } = useParams();
 
+    const {
+        data: memberData,
+    } = useApi(`/api/members/${id}`);
+
     const [profileForm, setProfileForm] = useState({
         id: '',
-        fullName: '',
+        full_name: '',
         email: '',
-        location: { country: '', state: '', city: '' },
+        city: '',
         phone: '',
-        linkedinURL: '',
-        facebookURL: '',
-        wantsUpdates: false,
+        linkedin_url: '',
+        facebook_url: '',
+        wants_updates: false,
         gender: '',
-        additionalInfo: '',
+        additional_info: '',
         experties: '',
         interests: '',
-        jobHistory: [
+        jobs_history: [
             {
-                jobTitle: '',
-                companyName: '',
-                startDate: '',
-                endDate: '',
+                role: '',
+                company_name: '',
+                start_date: '',
+                end_date: '',
                 description: '',
             },
         ],
-        jobs_history: [{ role: '', companyName: '', startDate: '', endDate: '' }],
-        years_of_experience: 0,
         groups: [],
     });
 
+    
     React.useEffect(() => {
         setProfileForm((prev) => ({
             ...prev,
-            ...dummyProfileData,
+            ...memberData,
         }));
-    }, []);
+    }, [memberData]);
 
     return (
         <Box

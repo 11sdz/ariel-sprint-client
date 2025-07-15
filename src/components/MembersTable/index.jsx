@@ -27,7 +27,7 @@ export default function MembersTable({ membersResult }) {
         setActiveProfilePopover("");
     }
 
-    function handleDoubleClick(id) {
+    function handleOnClick(id) {
         nav(`/profile/${id}`);
     }
     
@@ -70,7 +70,7 @@ export default function MembersTable({ membersResult }) {
                                                     fontSize={"25px"}
                                                 />
                                             </div>
-                                            <div className={styles.memberData} onClick={() => handleDoubleClick(item.id)}>
+                                            <div className={styles.memberData} onClick={() => handleOnClick(item.id)}>
                                                 {item.full_name}
                                                 <div
                                                     className={styles.secondTd}
