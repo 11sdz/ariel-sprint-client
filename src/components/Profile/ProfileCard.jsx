@@ -53,14 +53,19 @@ export default function ProfileCard({ profileData }) {
                             </span>
                             <span
                                 className={styles.details}
-                                style={{
-                                    color: '#5a5a5aff',
-                                    fontSize: '1rem', // smaller text
-                                    display: 'inline-flex', // align icon and text nicely
-                                    alignItems: 'center',
-                                    gap: '4px',
-                                }}
+                                style={{ color: "#4f4f4fff" }}
                             >
+                                <EmailIcon sx={{ my: -1 }} />
+                                {profileData.email}
+                            </span>
+                            <span className={styles.details}
+                            style={{
+                                    color: "#5a5a5aff",
+                                    fontSize: "1rem", // smaller text
+                                    display: "inline-flex", // align icon and text nicely
+                                    alignItems: "center",
+                                    gap: "4px",
+                                }}>
                                 <span>
                                     <LocationOnIcon sx={{ my: -1 }} />
                                     {profileData.country?.country_name}
@@ -73,33 +78,35 @@ export default function ProfileCard({ profileData }) {
                     <Box
                         sx={{
                             padding: 3,
-                            flexDirection: 'column',
-                            display: 'flex',
-                            alignItems: 'baseline',
-                            transform: 'scaleX(-1)',
-                            gap: 0.3,
+                            flexDirection: "column",
+                            display: "flex",
+                            alignItems: "baseline",
+                            transform: "scaleX(-1)",
+                            gap:0.3
                         }}
                     >
                         <span className={styles.nameText}>{profileData.full_name}</span>
 
-                        <span className={styles.details} style={{fontWeight:'bold',fontSize:'1.1rem'}}>{'"'}{profileData.additional_info}{'"'}</span>
+                        <span className={styles.details}>
+                            {profileData.additionalInfo}
+                        </span>
                         <span className={styles.link}>
                             <LinkedInIcon sx={{ my: -1 }} />
                             {profileData.linkedin_url}
                         </span>
-                        <span
-                            className={styles.details}
-                            style={{
-                                color: '#5a5a5aff',
-                                fontSize: '0.8rem', // smaller text
-                                display: 'inline-flex', // align icon and text nicely
-                                alignItems: 'center',
-                                gap: '4px',
-                            }}
-                        >
-                            <PhoneIcon sx={{ my: -1 }} />
-                            {profileData.phone}
-                        </span>
+                                                    <span
+                                className={styles.details}
+                                style={{
+                                    color: "#5a5a5aff",
+                                    fontSize: "0.8rem", // smaller text
+                                    display: "inline-flex", // align icon and text nicely
+                                    alignItems: "center",
+                                    gap: "4px",
+                                }}
+                            >
+                                <PhoneIcon sx={{my:-1}}/>
+                                {profileData.phone}
+                            </span>
                     </Box>
                 )}
             </Box>
