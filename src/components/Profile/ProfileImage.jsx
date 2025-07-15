@@ -3,7 +3,7 @@ import styles from "./style.module.scss";
 import { getInitials } from "../../utils/Profile/profileUtils";
 import { Avatar, Typography } from "@mui/material";
 
-export default function ProfileImage({ height, fullName }) {
+export default function ProfileImage({ src,height, fullName }) {
     return (
         <Avatar
             className={styles.profileImage}
@@ -14,8 +14,7 @@ export default function ProfileImage({ height, fullName }) {
                 backgroundImage:'linear-gradient(#3b82f6, #10b981)'
             }}
             alt={fullName}
-            src="/broken-link.jpg"
-            
+            src={src}
         >
             <Typography variant="h3">{getInitials(fullName)}</Typography>
         </Avatar>

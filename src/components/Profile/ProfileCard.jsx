@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ProfileImage from "./ProfileImage";
 import styles from "./style.module.scss";
-import { getInitials } from "../../utils/Profile/profileUtils";
 import { Box } from "@mui/material";
 
 export default function ProfileCard({ profileData }) {
@@ -25,7 +24,7 @@ export default function ProfileCard({ profileData }) {
             >
                 {!flipped ? (
                     <>
-                        <ProfileImage fullName={profileData.fullName} />
+                        {profileData.fullName && <ProfileImage fullName={profileData.fullName} />}
                         <Box
                             sx={{
                                 padding: 3,

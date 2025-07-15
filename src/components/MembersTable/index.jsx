@@ -31,6 +31,7 @@ export default function MembersTable({ membersResult }) {
                                             <div className={styles.profileImg}>
                                                 <ProfileImage
                                                     initials={getInitials(item.full_name)}
+                                                    src={item.profileImage}
                                                     width={'25px'}
                                                     height={'25px'}
                                                     fontSize={'25px'}
