@@ -4,6 +4,7 @@ import styles from "./style.module.scss";
 import { members } from "../Members/members";
 import GenderPieChart from "../../components/charts/GenderPieChart";
 import { Box, Typography } from "@mui/material";
+import SummaryChart from "../../components/charts/SummaryChart";
 
 
 const dummyCommunityData = {
@@ -41,6 +42,11 @@ export default function index() {
         acc[gender] = (acc[gender] || 0) + 1;
         return acc;
     }, {});
+    var sumAge =0
+    const averageAge = members.reduce((acc,members)=>{
+         sumAge= sumAge + Math.floor(Math.random() *17) + 20
+        return sumAge/dummyCommunityData.totalMembers
+    })
 
     return (
         <Box
@@ -61,11 +67,10 @@ export default function index() {
                     <GenderPieChart data={genderCounts} />
                 </DashboardCard>
                 <DashboardCard
-                    title={dummyCommunityData.title}
-                    amount={dummyCommunityData.totalMembers}
-                    precentChange={10}
-                    description={"Total Members"}
+                    title={"Summary"}
                 >
+                    <SummaryChart averageAge={averageAge} totalMembers={totalMembers} averageYearExp={4.566} mostJobCommonTitle={mostCommonTitle}/>
+
                 </DashboardCard>
             </Box>
             <div className={styles.membersContainer}>
