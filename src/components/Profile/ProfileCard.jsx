@@ -47,10 +47,6 @@ export default function ProfileCard({ profileData }) {
                                     </span>
                                 )}
                             </span>
-                            <span className={styles.details} style={{ color: '#5a5a5aff' }}>
-                                <EmailIcon sx={{ my: -1 }} />
-                                {profileData.email}
-                            </span>
                             <span
                                 className={styles.details}
                                 style={{ color: "#4f4f4fff" }}
@@ -68,8 +64,9 @@ export default function ProfileCard({ profileData }) {
                                 }}>
                                 <span>
                                     <LocationOnIcon sx={{ my: -1 }} />
-                                    {profileData.country?.country_name}
-                                    {profileData.city && `, ${profileData.city}`}
+                                    {/* {profileData.country?.country_name} */}
+                                    {/* {profileData.city && `, */}
+                                     {profileData.city}
                                 </span>
                             </span>
                         </Box>
@@ -87,8 +84,8 @@ export default function ProfileCard({ profileData }) {
                     >
                         <span className={styles.nameText}>{profileData.full_name}</span>
 
-                        <span className={styles.details}>
-                            {profileData.additionalInfo}
+                        <span className={styles.details} >
+                            {profileData.additional_info}
                         </span>
                         <span className={styles.link}>
                             <LinkedInIcon sx={{ my: -1 }} />
