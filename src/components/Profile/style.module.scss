@@ -6,7 +6,6 @@
   background-image: linear-gradient(to bottom right, #3b82f6, #10b981);
   align-items: center;
   justify-content: center;
-  border-radius: 100px;
   color: white;
   font-size: 2rem;
   font-weight: 600;
@@ -27,14 +26,18 @@
   align-items: center;
   justify-content: center;
   padding: 10px;
-  width: 450px;
+  width: 30rem;
   height: 15rem;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
   flex-direction: row;
-  background-image: linear-gradient(to bottom right,#F8F8F8 35%, #E5E0D8);
+  background-image: radial-gradient(ellipse at center,
+  #ffffff29 240px,
+  transparent 270px),
+    linear-gradient(to bottom right, #53ffba , #57fada, #4fc3fd);
   cursor: pointer;
-}
+} 
+
 
 
 .formContainer {
@@ -72,6 +75,7 @@
 
 .details{
   color: #213555;
+  cursor:text,
 }
 
 .link{
