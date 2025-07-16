@@ -5,6 +5,10 @@ import { members } from "../Members/members";
 import GenderPieChart from "../../components/charts/GenderPieChart";
 import { Box, Typography } from "@mui/material";
 import SummaryChart from "../../components/charts/SummaryChart";
+import MyCalendar from "../../components/Calendar/MyCalendar";
+import UpcomingEvent from "../../components/Calendar/UpcomingEvent";
+import { mockEvents } from "../../components/Calendar/events";
+import CreateEvent from "../../components/Calendar/CreateEvent";
 
 
 const dummyCommunityData = {
@@ -13,50 +17,39 @@ const dummyCommunityData = {
     totalMembers: members.length,
 };
 
+/**
+ * events:{
+ *  title,
+ *  start_date,
+ *  end_date,
+ *  description
+ *  type
+ * }
+ * 
+ * 
+ */
+
 export default function index() {
-    const totalMembers = members.length;
-
-    const totalExperience = members.reduce(
-        (sum, m) => sum + m.years_of_experience,
-        0
-    );
-
-    const avgExperience = (totalExperience / totalMembers).toFixed(1);
-
-    // Count job titles
-    const jobTitleCounts = members.reduce((acc, member) => {
-        member.jobHistory.forEach((job) => {
-            const title = job.jobTitle?.toLowerCase() || "unknown";
-            acc[title] = (acc[title] || 0) + 1;
-        });
-        return acc;
-    }, {});
-
-    const mostCommonTitle =
-        Object.entries(jobTitleCounts).sort((a, b) => b[1] - a[1])[0]?.[0] ||
-        "N/A";
-
-    // Count genders
-    const genderCounts = members.reduce((acc, member) => {
-        const gender = member.gender?.toLowerCase() || "unknown";
-        acc[gender] = (acc[gender] || 0) + 1;
-        return acc;
-    }, {});
-    var sumAge =0
-    const averageAge = members.reduce((acc,members)=>{
-         sumAge= sumAge + Math.floor(Math.random() *17) + 20
-        return sumAge/dummyCommunityData.totalMembers
-    })
-
     return (
         <Box
             sx={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center",
+                padding:'20px',
+                alignItems:'center'
+                
             }}
         >
-            <Box
+            <Box sx={{display:'flex',flexDirection:'row'}}>
+                <MyCalendar/>
+                <UpcomingEvent events={mockEvents}/>
+                <CreateEvent/>
+            </Box>
+
+
+
+
+            {/* <Box
                 sx={{
                     display: "flex",
                     flexDirection: "row",
@@ -80,7 +73,7 @@ export default function index() {
                         <p>{member.role}</p>
                     </div>
                 ))}
-            </div>
+            </div> */}
         </Box>
     );
 }

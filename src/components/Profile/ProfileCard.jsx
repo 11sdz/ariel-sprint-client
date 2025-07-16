@@ -11,6 +11,8 @@ import PhoneIcon from '@mui/icons-material/Phone';
 export default function ProfileCard({ profileData }) {
     const [flipped, setFlipped] = useState(false);
 
+    console.log("DATA of profile",profileData)
+
     useEffect(() => {}, [profileData.full_name, profileData.gender]);
     return (
         <Box
@@ -85,7 +87,7 @@ export default function ProfileCard({ profileData }) {
                         <span className={styles.nameText}>{profileData.full_name}</span>
 
                         <span className={styles.details} >
-                            {profileData.additional_info}
+                            {'"'}{profileData.additional_info}{'"'}
                         </span>
                         <span className={styles.link}>
                             <LinkedInIcon sx={{ my: -1 }} />
