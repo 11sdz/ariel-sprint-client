@@ -1,59 +1,65 @@
-import React, { useState } from 'react';
-import ProfileCard from '../../components/Profile/ProfileCard';
-import styles from './style.module.scss';
-import ProfileForm from '../../components/Profile/ProfileForm';
-import { Box, useMediaQuery, useTheme } from '@mui/material';
-import { useParams } from 'react-router-dom';
-import { useApi } from '../../hooks/useApi';
+import React, { useState } from "react";
+import ProfileCard from "../../components/Profile/ProfileCard";
+import styles from "./style.module.scss";
+import ProfileForm from "../../components/Profile/ProfileForm";
+import { Box, useMediaQuery, useTheme } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { useApi } from "../../hooks/useApi";
+import { dummyProfileData } from "./profile";
 
 export default function Index() {
     const theme = useTheme();
-    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
     const { id } = useParams();
 
-    const {
-        data: memberData,
-    } = useApi(`/api/members/${id}`);
+    const { data: memberData } = useApi(`/api/members/${id}`);
 
     const [profileForm, setProfileForm] = useState({
-        id: '',
-        full_name: '',
-        email: '',
-        city: '',
-        phone: '',
-        linkedin_url: '',
-        facebook_url: '',
+        id: "",
+        full_name: "",
+        email: "",
+        city: "",
+        phone: "",
+        linkedin_url: "",
+        facebook_url: "",
         wants_updates: false,
-        gender: '',
-        additional_info: '',
-        experties: '',
-        interests: '',
+        gender: "",
+        profile_img:'',
+        additional_info: "",
+        experties: "",
+        interests: "",
         job_history: [
             {
-                role: '',
-                company_name: '',
-                start_date: '',
-                end_date: '',
-                description: '',
+                role: "",
+                company_name: "",
+                start_date: "",
+                end_date: "",
+                description: "",
             },
         ],
         groups: [],
     });
-
     
-    React.useEffect(() => {
-        setProfileForm((prev) => ({
-            ...prev,
-            ...memberData,
-        }));
-    }, [memberData]);
+        React.useEffect(() => {
+            if(!id)
+            {setProfileForm((prev) => ({
+                ...prev,
+                ...dummyProfileData,
+            }));}
+            else{
+                setProfileForm((prev) => ({
+                ...prev,
+                ...memberData,
+            }));
+            }
+        }, [memberData]);
 
     return (
         <Box
             sx={{
-                display: 'flex',
-                alignItems: isMobile ? 'center' : 'center',
-                flexDirection: isMobile ? 'column' : 'column',
+                display: "flex",
+                alignItems: isMobile ? "center" : "center",
+                flexDirection: isMobile ? "column" : "column",
                 gap: 1,
                 padding: 2,
             }}

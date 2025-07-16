@@ -74,11 +74,24 @@ export const mockEvents = [
 ];
 
 export const eventTypes = [
-    { type: "meetup", label: "Meetup", color: "#4caf50" }, // green
-    { type: "hackathon", label: "Hackathon", color: "#2196f3" }, // blue
-    { type: "webinar", label: "Webinar", color: "#9c27b0" }, // purple
-    { type: "networking", label: "Networking", color: "#ff9800" }, // orange
-    { type: "training", label: "Training", color: "#f44336" }, // red
-    { type: "pitch", label: "Pitch Event", color: "#00bcd4" }, // cyan
-    { type: "panel", label: "Panel Discussion", color: "#795548" }, // brown
+    "Meetup",
+    "Hackathon",
+    "Webinar",
+    "Networking",
+    "Training",
+    "Pitch Event",
+    "Panel Discussion",
+    "Workshop",
+    "Fireside Chat",
+    "Seminar",
+    "Bootcamp",
+    "Conference",
+    "AMA Session",
+    "Roundtable",
+    "Demo Day",
+    "Product Launch",
+    "Community Gathering",
+    "Tech Talk",
+    "Innovation Sprint",
+    "Open House",
 ];
