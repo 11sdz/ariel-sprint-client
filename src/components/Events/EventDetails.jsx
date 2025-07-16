@@ -29,7 +29,7 @@ export default function EventDetails({ eventDay }) {
                                 height:120,
                                 width:'100%',
                                 objectFit: "cover",
-                                ref
+                                
                             }}
                         />
                     )}
