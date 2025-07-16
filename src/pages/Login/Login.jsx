@@ -23,7 +23,7 @@ export default function Login() {
       const { code, error } = event.data;
       if (code) {
         // שלח קוד לשרת
-        fetch('http://localhost:4000/auth/linkedin/token', {
+        fetch('http://localhost:3000/auth/linkedin/token', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ code }),
