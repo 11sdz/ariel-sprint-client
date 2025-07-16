@@ -17,9 +17,9 @@ export default function TagFilterGroup({ label, options = [], selected = [], onC
         {label}
       </Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
-        {options.map((tag) => (
+        {options.map((tag, index) => (
           <Chip
-            key={tag}
+            key={index}
             label={tag}
             onClick={() => handleToggle(tag)}
             color={selected.includes(tag) ? 'primary' : 'default'}

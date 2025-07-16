@@ -12,6 +12,9 @@ export default function ProfileCard({ profileData }) {
     const [flipped, setFlipped] = useState(false);
 
     useEffect(() => {}, [profileData.full_name, profileData.gender]);
+
+    const job = profileData.job_history?.[0];
+
     return (
         <Box
             sx={{
@@ -38,35 +41,32 @@ export default function ProfileCard({ profileData }) {
                             }}
                         >
                             <span className={styles.nameText}>{profileData.full_name}</span>
-                            <span className={styles.details} style={{ color: '#001c5fff' }}>
-                                {profileData.job_history?.[0] && (
-                                    <span className={styles.details} style={{ color: '#001c5fff' }}>
-                                        {profileData.job_history[0].role}
-                                        {profileData.job_history[0].company_name &&
-                                            `, ${profileData.job_history[0].company_name}`}
-                                    </span>
-                                )}
-                            </span>
-                            <span
-                                className={styles.details}
-                                style={{ color: "#4f4f4fff" }}
-                            >
+
+                            {job && (
+                                <span className={styles.details} style={{ color: '#001c5fff' }}>
+                                    {job.role}
+                                    {job.company_name && `, ${job.company_name}`}
+                                </span>
+                            )}
+                        
+                            <span className={styles.details} style={{ color: '#4f4f4fff' }}>
                                 <EmailIcon sx={{ my: -1 }} />
                                 {profileData.email}
                             </span>
-                            <span className={styles.details}
-                            style={{
-                                    color: "#5a5a5aff",
-                                    fontSize: "1rem", // smaller text
-                                    display: "inline-flex", // align icon and text nicely
-                                    alignItems: "center",
-                                    gap: "4px",
-                                }}>
+                            <span
+                                className={styles.details}
+                                style={{
+                                    color: '#5a5a5aff',
+                                    fontSize: '1rem', // smaller text
+                                    display: 'inline-flex', // align icon and text nicely
+                                    alignItems: 'center',
+                                    gap: '4px',
+                                }}
+                            >
                                 <span>
                                     <LocationOnIcon sx={{ my: -1 }} />
-                                    {/* {profileData.country?.country_name} */}
-                                    {/* {profileData.city && `, */}
-                                     {profileData.city}
+                                    {/* {profileData.location.country} */}
+                                    {profileData.city && `, ${profileData.city}`}
                                 </span>
                             </span>
                         </Box>
@@ -75,35 +75,58 @@ export default function ProfileCard({ profileData }) {
                     <Box
                         sx={{
                             padding: 3,
-                            flexDirection: "column",
-                            display: "flex",
-                            alignItems: "baseline",
-                            transform: "scaleX(-1)",
-                            gap:0.3
+                            flexDirection: 'column',
+                            display: 'flex',
+                            alignItems: 'baseline',
+                            transform: 'scaleX(-1)',
+                            gap: 0.3,
                         }}
                     >
                         <span className={styles.nameText}>{profileData.full_name}</span>
 
-                        <span className={styles.details} >
-                            {profileData.additional_info}
+                        <span
+                            className={styles.details}
+                            style={{
+                                color: '#110000ff',
+                                fontSize: '1.1rem', // smaller text
+                                display: 'inline-flex', // align icon and text nicely
+                                alignItems: 'center',
+                                gap: '4px',
+                                fontWeight: 'bolder',
+                            }}
+                        >
+                            {'"'}
+                            {profileData.additionalInfo}
+                            {'"'}
                         </span>
-                        <span className={styles.link}>
+                        <span
+                            className={styles.details}
+                            style={{
+                                color: '#082cfbff',
+                                fontSize: '1rem', // smaller text
+                                display: 'inline-flex', // align icon and text nicely
+                                alignItems: 'center',
+                                gap: '4px',
+                                fontWeight: 'bold',
+                            }}
+                        >
                             <LinkedInIcon sx={{ my: -1 }} />
                             {profileData.linkedin_url}
                         </span>
-                                                    <span
-                                className={styles.details}
-                                style={{
-                                    color: "#5a5a5aff",
-                                    fontSize: "0.8rem", // smaller text
-                                    display: "inline-flex", // align icon and text nicely
-                                    alignItems: "center",
-                                    gap: "4px",
-                                }}
-                            >
-                                <PhoneIcon sx={{my:-1}}/>
-                                {profileData.phone}
-                            </span>
+                        <span
+                            className={styles.details}
+                            style={{
+                                color: '#474747ff',
+                                fontSize: '1rem', // smaller text
+                                display: 'inline-flex', // align icon and text nicely
+                                alignItems: 'center',
+                                gap: '4px',
+                                fontWeight: 'bolder',
+                            }}
+                        >
+                            <PhoneIcon sx={{ my: -1 }} />
+                            {profileData.phone}
+                        </span>
                     </Box>
                 )}
             </Box>
