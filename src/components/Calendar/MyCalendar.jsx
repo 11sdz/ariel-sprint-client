@@ -16,7 +16,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { mockEvents } from "./events";
-import { getColorForType } from "../../utils/Dashboard/eventsUtils";
+import { getColorForType, getEventsForDate } from "../../utils/Dashboard/eventsUtils";
 
 const formatDay = (day, selectedDate) => ({
     textAlign: "center",
@@ -50,7 +50,7 @@ const eventColors = {
  *
  */
 
-export default function UnifiedWeekMonthCalendar({ events = mockEvents }) {
+export default function UnifiedWeekMonthCalendar({ events = mockEvents,setDay }) {
     const [selectedDate, setSelectedDate] = useState(dayjs());
     const [selectedEvent, setSelectedEvent] = useState();
 
@@ -61,24 +61,20 @@ export default function UnifiedWeekMonthCalendar({ events = mockEvents }) {
 
     function handleBackward() {
         setSelectedDate((prev) => prev.subtract(7, "day"));
+        setSelectedEvent(getEventsForDate(selectedDate,events)[0])
     }
 
     function handleForward() {
         setSelectedDate((prev) => prev.add(7, "day"));
+        setSelectedEvent(getEventsForDate(selectedDate,events)[0])
     }
 
     function handleSelectDay(date) {
         setSelectedDate(date);
+        setDay(date)
 
         // Find event(s) on the selected date (you can pick first, or all)
-        const eventsForDay = (events || []).filter((event) =>
-            dayjs(date).isBetween(
-                dayjs(event.start_date).startOf("day"),
-                dayjs(event.end_date).endOf("day"),
-                null,
-                "[]"
-            )
-        );
+        const eventsForDay = getEventsForDate(date,events)
 
         if (eventsForDay.length > 0) {
             // If multiple events, pick the first or handle as you want
@@ -108,10 +104,10 @@ export default function UnifiedWeekMonthCalendar({ events = mockEvents }) {
                         height: 60,
                     }}
                 >
-                    <Typography variant="subtitle1">
+                    <Typography variant="subtitle1" sx={{fontFamily:"Poppins",fontSize:'1.1rem'}}>
                         {selectedDate.format("dddd, MMM D")}{" "}
                     </Typography>
-                    <Typography variant="subtitle1">
+                    <Typography variant="subtitle1" sx={{fontFamily:"Poppins",fontWeight:'bold',fontSize:'1.1rem'}}>
                         {selectedEvent?.event_name}
                     </Typography>
                 </Box>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DashboardCard from "../../Dashboard/DashboardCard";
 import styles from "./style.module.scss";
 import { members } from "../Members/members";
@@ -10,6 +10,8 @@ import UpcomingEvent from "../../components/Calendar/UpcomingEvent";
 import { mockEvents } from "../../components/Calendar/events";
 import CreateEvent from "../../components/Calendar/CreateEvent";
 import { useApi } from "../../hooks/useApi";
+import EventDetails from "../../components/Events/EventDetails";
+import { getEventsForDate } from "../../utils/Dashboard/eventsUtils";
 
 
 const dummyCommunityData = {
@@ -31,6 +33,7 @@ const dummyCommunityData = {
  */
 
 export default function index() {
+    const [day,setDay] = useState(new Date())
 
     const {
             data: eventsData,
@@ -47,14 +50,18 @@ export default function index() {
                 display: "flex",
                 flexDirection: "column",
                 padding:'20px',
-                alignItems:'center'
-                
+                //alignItems:'center',
+                gap:2
             }}
         >
             <Box sx={{display:'flex',flexDirection:'row'}}>
-                <MyCalendar events={eventsData}/>
-                <UpcomingEvent events={eventsData}/>
+                <MyCalendar events={eventsData} setDay={setDay}/>
+                <UpcomingEvent events={eventsData} setDay={setDay}/>
                 <CreateEvent/>
+            </Box>
+
+            <Box>
+                {eventsData && getEventsForDate(day,eventsData)[0] && <EventDetails eventDay={getEventsForDate(day,eventsData)[0]}/>}
             </Box>
             <Typography variant="h5">
                 Tmrw: Attendence Accepted/Interested - Maybe - Cant (show nice with grouped avatars of members)

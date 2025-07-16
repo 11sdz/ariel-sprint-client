@@ -47,3 +47,28 @@ export function getColorForType(type) {
   }
   return eventColorsMap[key];
 }
+
+/**
+ * Filters events that occur on a specific day.
+ * 
+ * @param {Date | string | dayjs.Dayjs} targetDate - The date to check.
+ * @param {Array} events - Array of event objects with start_date and end_date.
+ * @returns {Array} Filtered events that happen on the given date.
+ */
+export function getEventsForDate(targetDate, events = []) {
+    const day = dayjs(targetDate);
+
+    return events.filter((event) =>
+        day.isBetween(
+            dayjs(event.start_date).startOf("day"),
+            dayjs(event.end_date).endOf("day"),
+            null,
+            "[]"
+        )
+    );
+}
+
+export function formatDateShort(dateString) {
+  if (!dateString) return "";
+  return dayjs(dateString).format("DD/MM/YY");
+}

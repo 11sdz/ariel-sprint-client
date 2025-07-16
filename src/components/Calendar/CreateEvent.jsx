@@ -12,6 +12,7 @@ import {
     InputLabel,
     Select,
     Button,
+    CardMedia,
 } from "@mui/material";
 import EditCalendarIcon from "@mui/icons-material/EditCalendar";
 import React, { useState } from "react";
@@ -24,6 +25,14 @@ import Lottie from "lottie-react";
 import animationData from "../../assets/Lottie/calendar-booking.json";
 import { useApi } from "../../hooks/useApi";
 
+
+import LooksOneIcon from '@mui/icons-material/LooksOne';
+import LooksTwoIcon from '@mui/icons-material/LooksTwo';
+import Looks3Icon from '@mui/icons-material/Looks3';
+import Looks4Icon from '@mui/icons-material/Looks4';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+
 export default function CreateEvent() {
     const [openDatePicker, setOpenDatePicker] = useState(false);
     const [eventName, setEventName] = useState("");
@@ -32,7 +41,12 @@ export default function CreateEvent() {
     const [description, setDescription] = useState("");
     const [selectedStartDate, setSelectedStartDate] = useState(dayjs());
     const [selectedEndDate, setSelectedEndDate] = useState(dayjs());
+    const [coverImage, setCoverImage] = useState("");
     const [newEvent, setNewEvent] = useState(null);
+
+    function handleSetCoverImage(){
+        setCoverImage('')
+    }
 
     function handleCloseDatePicker() {
         setOpenDatePicker(false);
@@ -63,10 +77,17 @@ export default function CreateEvent() {
             location: eventLocation,
         };
 
+        setNewEvent(eventData); // optional, for UI preview or debug
 
-        setNewEvent(eventData); // optional
+        createEvent(eventData); // dynamic mutation
 
-        createEvent(newEvent); // dynamic mutation
+        // ✅ Reset form fields after submission
+        setEventName("");
+        setEventType("");
+        setDescription("");
+        setSelectedStartDate(null);
+        setSelectedEndDate(null);
+        setEventLocation("");
     }
 
     return (
@@ -123,7 +144,39 @@ export default function CreateEvent() {
                             justifyContent: "center",
                         }}
                     >
-                        <Lottie animationData={animationData} />
+                        <Paper>
+                            <Lottie animationData={animationData} />
+                        </Paper>
+                        <ToggleButtonGroup
+                            value={coverImage}
+                            exclusive
+                            onChange={handleSetCoverImage}
+                            aria-label="text alignment"
+                            sx={{justifyContent:'center'}}
+                        >
+                            <ToggleButton
+                                value="left"
+                                aria-label="left aligned"
+                            >
+                                <LooksOneIcon />
+                            </ToggleButton>
+                            <ToggleButton value="center" aria-label="centered">
+                                <LooksTwoIcon />
+                            </ToggleButton>
+                            <ToggleButton
+                                value="right"
+                                aria-label="right aligned"
+                            >
+                                <Looks3Icon />
+                            </ToggleButton>
+                            <ToggleButton
+                                value="justify"
+                                aria-label="justified"
+                            >
+                                <Looks4Icon />
+                            </ToggleButton>
+                        </ToggleButtonGroup>
+
                         <TextField
                             variant="outlined"
                             label="Event Name"
@@ -176,19 +229,26 @@ export default function CreateEvent() {
                                 <DatePicker
                                     label="When"
                                     value={selectedStartDate}
-                                    onChange={(newValue) =>
-                                        setSelectedStartDate(newValue)
-                                    }
+                                    minDate={dayjs()} // ✅ Must be a dayjs object
+                                    onChange={(newValue) => {
+                                        setSelectedStartDate(newValue);
+                                        // Optionally update end date if it becomes invalid
+                                        if (
+                                            newValue &&
+                                            selectedEndDate.isBefore(newValue)
+                                        ) {
+                                            setSelectedEndDate(newValue);
+                                        }
+                                    }}
                                     renderInput={(params) => (
-                                        <TextField {...params} />
+                                        <TextField {...params} sx={{ mr: 2 }} />
                                     )}
                                 />
-                            </LocalizationProvider>
-                            {/* DatePicker */}
-                            <LocalizationProvider dateAdapter={AdapterDayjs}>
+
                                 <DatePicker
                                     label="Until"
                                     value={selectedEndDate}
+                                    minDate={selectedStartDate} // ✅ This is also a dayjs object
                                     onChange={(newValue) =>
                                         setSelectedEndDate(newValue)
                                     }
