@@ -15,6 +15,7 @@ import { DateCalendar, LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { mockEvents } from "./events";
 
 const formatDay = (day, selectedDate) => ({
     textAlign: "center",
@@ -42,68 +43,12 @@ const eventColors = {
  *  end_date,
  *  description
  *  type
+ *  cover_img
  * }
  *
  *
  */
-const mockEvents = [
-  {
-    title: "AI & ML Meetup",
-    start_date: "2025-07-21T18:00:00",
-    end_date: "2025-07-21T20:00:00",
-    description: "Discuss latest trends in AI and machine learning.",
-    type: "meetup",
-  },
-  {
-    title: "Web3 Hackathon Kickoff",
-    start_date: "2025-07-24T10:00:00",
-    end_date: "2025-07-24T22:00:00",
-    description: "24-hour Web3 hackathon opening event.",
-    type: "hackathon",
-  },
-  {
-    title: "Cloud Security Webinar",
-    start_date: "2025-07-28T16:00:00",
-    end_date: "2025-07-28T17:30:00",
-    description: "Best practices for securing cloud infrastructure.",
-    type: "webinar",
-  },
-  {
-    title: "Tech Networking Night",
-    start_date: "2025-07-30T19:00:00",
-    end_date: "2025-07-30T21:00:00",
-    description: "Meet fellow tech professionals and share ideas.",
-    type: "networking",
-  },
-  {
-    title: "Kubernetes Workshop",
-    start_date: "2025-08-04T09:00:00",
-    end_date: "2025-08-04T12:00:00",
-    description: "Hands-on workshop on Kubernetes orchestration.",
-    type: "training",
-  },
-  {
-    title: "Startups Pitch Day",
-    start_date: "2025-08-07T14:00:00",
-    end_date: "2025-08-07T18:00:00",
-    description: "Present your startup ideas to potential investors.",
-    type: "pitch",
-  },
-  {
-    title: "Quantum Computing Talk",
-    start_date: "2025-08-11T17:00:00",
-    end_date: "2025-08-11T18:30:00",
-    description: "Introductory talk on quantum computing.",
-    type: "talk",
-  },
-  {
-    title: "Women in Tech Panel",
-    start_date: "2025-08-14T18:00:00",
-    end_date: "2025-08-14T20:00:00",
-    description: "Panel discussion featuring leading women in tech.",
-    type: "panel",
-  },
-];
+
 
 export default function UnifiedWeekMonthCalendar({ events = mockEvents }) {
     const [selectedDate, setSelectedDate] = useState(dayjs());
