@@ -11,6 +11,8 @@ import PhoneIcon from '@mui/icons-material/Phone';
 export default function ProfileCard({ profileData }) {
     const [flipped, setFlipped] = useState(false);
 
+    console.log("DATA of profile",profileData)
+
     useEffect(() => {}, [profileData.full_name, profileData.gender]);
 
     const job = profileData.job_history?.[0];
@@ -96,7 +98,7 @@ export default function ProfileCard({ profileData }) {
                             }}
                         >
                             {'"'}
-                            {profileData.additionalInfo}
+                            {'"'}{profileData.additionalInfo}{'"'}
                             {'"'}
                         </span>
                         <span
