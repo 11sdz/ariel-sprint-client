@@ -1,4 +1,4 @@
-import { alpha, Box, Paper, Typography, CardMedia } from "@mui/material";
+import { alpha, Box, Paper, Typography, CardMedia, Avatar, AvatarGroup } from "@mui/material";
 import React from "react";
 import {
     formatDateShort,
@@ -10,10 +10,11 @@ export default function EventDetails({ eventDay }) {
     return (
         <Paper
             sx={{
-                p: 2,
+                p: 3,
                 borderRadius: 4,
                 boxShadow: 3,
-                maxWidth: "25%",
+                height:370,
+                width:310,
                 bgcolor: bgColor,
             }}
         >
@@ -26,10 +27,9 @@ export default function EventDetails({ eventDay }) {
                             alt={eventDay.event_name}
                             sx={{
                                 borderRadius: 2,
-                                height:120,
-                                width:'100%',
+                                height: 120,
+                                width: "90%",
                                 objectFit: "cover",
-                                
                             }}
                         />
                     )}
@@ -45,6 +45,28 @@ export default function EventDetails({ eventDay }) {
                         {eventDay?.descriptions}
                         {'"'}
                     </Typography>
+                    
+                    <Box sx={{display:'flex',flexDirection:'row',justifyContent:'space-between',alignItems:'center'}}>
+                        <Typography variant="body1" color="initial" sx={{color:'#006affff',cursor:'pointer'}}>eventlink.co.il</Typography>
+                        <AvatarGroup total={24}>
+                            <Avatar
+                                alt="Remy Sharp"
+                                src="/static/images/avatar/1.jpg"
+                            />
+                            <Avatar
+                                alt="Travis Howard"
+                                src="/static/images/avatar/2.jpg"
+                            />
+                            <Avatar
+                                alt="Agnes Walker"
+                                src="/static/images/avatar/4.jpg"
+                            />
+                            <Avatar
+                                alt="Trevor Henderson"
+                                src="/static/images/avatar/5.jpg"
+                            />
+                        </AvatarGroup>
+                    </Box>
                 </Box>
             </Box>
         </Paper>
