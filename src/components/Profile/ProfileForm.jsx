@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "./style.module.scss";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import { Box, Icon, IconButton, MenuItem, TextField } from "@mui/material";
+import { Box, FormGroup, Icon, IconButton, MenuItem, Switch, TextField, Button, FormControlLabel } from "@mui/material";
 import DoneOutlineIcon from "@mui/icons-material/DoneOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { countries } from "./countries";
@@ -12,6 +12,8 @@ export default function ProfileForm({ formData, setFormData }) {
     const [originalData, setOriginalData] = useState(formData);
     const [isEditEnabled, setIsEditEnabled] = useState(false);
 
+
+    ///!!! gender groups experties interests and job history
     const { id,gender,experties,interests,job_history,groups, ...dataToSend } = formData;
 
     const { data, loading, error, refetch } = useApi(
@@ -40,7 +42,7 @@ export default function ProfileForm({ formData, setFormData }) {
 
     function handleChange(e) {
         const name = e.target.name; // e.g. "jobHistory.0.jobTitle"
-        const value = e.target.value;
+        const value = e.target.type === "checkbox" ? e.target.checked : e.target.value;
 
         if (name.includes(".")) {
             const keys = name.split("."); // ['jobHistory', '0', 'jobTitle']
@@ -224,6 +226,18 @@ export default function ProfileForm({ formData, setFormData }) {
                             onChange={handleChange}
                             disabled={!isEditEnabled}
                         />
+                            <FormControlLabel
+                              label="Send me updates"
+                              control={
+                                <Switch
+                                  value={formData.wants_updates}
+                                  checked={formData.wants_updates}
+                                  onChange={handleChange}
+                                  name="wants_updates"
+                                />
+                              }
+                              disabled={!isEditEnabled}
+                            />
                     </Box>
                     <Box>
                         <TextField

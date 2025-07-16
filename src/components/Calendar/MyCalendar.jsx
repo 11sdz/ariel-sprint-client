@@ -16,6 +16,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { mockEvents } from "./events";
+import { getColorForType } from "../../utils/Dashboard/eventsUtils";
 
 const formatDay = (day, selectedDate) => ({
     textAlign: "center",
@@ -49,10 +50,9 @@ const eventColors = {
  *
  */
 
-
 export default function UnifiedWeekMonthCalendar({ events = mockEvents }) {
     const [selectedDate, setSelectedDate] = useState(dayjs());
-    const [selectedEvent, setSelectedEvent] = useState("he");
+    const [selectedEvent, setSelectedEvent] = useState();
 
     const startOfWeek = selectedDate.startOf("week");
     const weekDays = Array.from({ length: 7 }, (_, i) =>
@@ -112,7 +112,7 @@ export default function UnifiedWeekMonthCalendar({ events = mockEvents }) {
                         {selectedDate.format("dddd, MMM D")}{" "}
                     </Typography>
                     <Typography variant="subtitle1">
-                        {selectedEvent?.title}
+                        {selectedEvent?.event_name}
                     </Typography>
                 </Box>
                 <Box sx={{ display: "flex", flexDirection: "row" }}>
@@ -121,7 +121,7 @@ export default function UnifiedWeekMonthCalendar({ events = mockEvents }) {
                     </IconButton>
                     {weekDays.map((day) => {
                         // Get events that happen on this day (any overlap)
-                        const eventsForDay = events.filter((event) => {
+                        const eventsForDay = (events || []).filter((event) => {
                             const eventStart = dayjs(event.start_date);
                             const eventEnd = dayjs(
                                 event.end_date || event.start_date
@@ -150,9 +150,7 @@ export default function UnifiedWeekMonthCalendar({ events = mockEvents }) {
                                 {/* Event markers */}
                                 <Box sx={{ mt: 0.5 }}>
                                     {eventsForDay.map((event, i) => {
-                                        const color =
-                                            eventColors[event.type] ||
-                                            eventColors.default;
+                                        const color = getColorForType(event.type)
                                         const start = dayjs(
                                             event.start_date
                                         ).format("HH:mm");
@@ -175,11 +173,14 @@ export default function UnifiedWeekMonthCalendar({ events = mockEvents }) {
                                                     textOverflow: "ellipsis",
                                                     cursor: "default",
                                                 }}
-                                                title={`${event.title} (${start} - ${end})`}
+                                                title={`${event.event_name} (${start} - ${end})`}
                                             >
-                                                <Typography variant='caption' sx={{fontSize:'0.7rem'}}>
-                                                    {event.title}<br/> ({start}-{end}
-                                                    )
+                                                <Typography
+                                                    variant="caption"
+                                                    sx={{ fontSize: "0.7rem" }}
+                                                >
+                                                    {event.event_name}
+                                                    <br /> ({start}-{end})
                                                 </Typography>
                                             </Box>
                                         );

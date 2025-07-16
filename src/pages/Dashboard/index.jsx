@@ -9,6 +9,7 @@ import MyCalendar from "../../components/Calendar/MyCalendar";
 import UpcomingEvent from "../../components/Calendar/UpcomingEvent";
 import { mockEvents } from "../../components/Calendar/events";
 import CreateEvent from "../../components/Calendar/CreateEvent";
+import { useApi } from "../../hooks/useApi";
 
 
 const dummyCommunityData = {
@@ -30,6 +31,16 @@ const dummyCommunityData = {
  */
 
 export default function index() {
+
+    const {
+            data: eventsData,
+            loading: eventsLoading,
+            error: eventsError,
+            refetch: refetchEvents,
+        } = useApi('/api/events');
+
+    console.log(eventsData,"THIS IS EVENTS DATA");
+
     return (
         <Box
             sx={{
@@ -41,10 +52,19 @@ export default function index() {
             }}
         >
             <Box sx={{display:'flex',flexDirection:'row'}}>
-                <MyCalendar/>
-                <UpcomingEvent events={mockEvents}/>
+                <MyCalendar events={eventsData}/>
+                <UpcomingEvent events={eventsData}/>
                 <CreateEvent/>
             </Box>
+            <Typography variant="h5">
+                Tmrw: Attendence Accepted/Interested - Maybe - Cant (show nice with grouped avatars of members)
+                <br/>
+                Discovery: users can watch upcoming events as Cards or something and signup
+                <br/>
+                server and backend data
+                <br/>
+
+            </Typography>
 
 
 

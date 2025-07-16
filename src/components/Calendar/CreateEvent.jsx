@@ -22,14 +22,17 @@ import { eventTypes } from "./events";
 import { toTitleCase } from "../../utils/textUtils";
 import Lottie from "lottie-react";
 import animationData from "../../assets/Lottie/calendar-booking.json";
+import { useApi } from "../../hooks/useApi";
 
 export default function CreateEvent() {
-    const [openDatePicker, setOpenDatePicker] = useState(true);
+    const [openDatePicker, setOpenDatePicker] = useState(false);
     const [eventName, setEventName] = useState("");
     const [eventType, setEventType] = useState("");
+    const [eventLocation, setEventLocation] = useState("");
     const [description, setDescription] = useState("");
     const [selectedStartDate, setSelectedStartDate] = useState(dayjs());
-     const [selectedEndDate, setSelectedEndDate] = useState(dayjs());
+    const [selectedEndDate, setSelectedEndDate] = useState(dayjs());
+    const [newEvent, setNewEvent] = useState(null);
 
     function handleCloseDatePicker() {
         setOpenDatePicker(false);
@@ -39,16 +42,31 @@ export default function CreateEvent() {
         setOpenDatePicker(true);
     }
 
-    function handleSubmit() {
-        // Here you can process form data or send to your backend
-        console.log({
-            eventName,
-            eventType,
-            description,
-            selectedStartDate: selectedStartDate.format("YYYY-MM-DD"),
-             selectedStartEndDate: selectedStartEndDate.format("YYYY-MM-DD"),
-        });
+    const {
+        mutate: createEvent,
+        data: responseData,
+        error: postError,
+        isLoading: isPosting,
+    } = useApi("/api/events", {
+        method: "POST",
+    });
+
+    async function handleSubmit() {
         setOpenDatePicker(false);
+
+        const eventData = {
+            event_name: eventName,
+            type: eventType,
+            descriptions: description,
+            start_date: selectedStartDate.toISOString(),
+            end_date: selectedEndDate.toISOString(),
+            location: eventLocation,
+        };
+
+
+        setNewEvent(eventData); // optional
+
+        createEvent(newEvent); // dynamic mutation
     }
 
     return (
@@ -77,7 +95,11 @@ export default function CreateEvent() {
                     </IconButton>
                 </Tooltip>
             </Paper>
-            <Modal open={openDatePicker} onClose={handleCloseDatePicker} closeAfterTransition>
+            <Modal
+                open={openDatePicker}
+                onClose={handleCloseDatePicker}
+                closeAfterTransition
+            >
                 <Box
                     sx={{
                         position: "absolute",
@@ -92,59 +114,67 @@ export default function CreateEvent() {
                         width: 380,
                     }}
                 >
+                    <Box
+                        sx={{
+                            p: 1,
+                            display: "flex",
+                            flexDirection: "column",
+                            gap: 2,
+                            justifyContent: "center",
+                        }}
+                    >
+                        <Lottie animationData={animationData} />
+                        <TextField
+                            variant="outlined"
+                            label="Event Name"
+                            value={eventName}
+                            onChange={(e) => setEventName(e.target.value)}
+                        />
+                        <TextField
+                            variant="outlined"
+                            label="Where"
+                            value={eventLocation}
+                            onChange={(e) => setEventLocation(e.target.value)}
+                        />
+                        <FormControl fullWidth>
+                            <InputLabel id="event-type-label">Type</InputLabel>
+                            <Select
+                                labelId="event-type-label"
+                                value={eventType}
+                                label="Type"
+                                onChange={(e) => setEventType(e.target.value)}
+                            >
+                                {eventTypes.map((eventTypeItem) => (
+                                    <MenuItem
+                                        key={eventTypeItem}
+                                        value={eventTypeItem}
+                                    >
+                                        {toTitleCase(eventTypeItem)}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                        <TextField
+                            variant="outlined"
+                            label="Describe the event"
+                            multiline
+                            maxRows={4}
+                            rows={2}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                        />
+
+                        {/* DatePicker */}
                         <Box
                             sx={{
-                                p: 1,
                                 display: "flex",
-                                flexDirection: "column",
-                                gap: 2,
-                                justifyContent:'center'
+                                flexDirection: "row",
+                                gap: 1,
                             }}
                         >
-                            <Lottie animationData={animationData}/>
-                            <TextField
-                                variant="outlined"
-                                label="Event Name"
-                                value={eventName}
-                                onChange={(e) => setEventName(e.target.value)}
-                            />
-                            <FormControl fullWidth>
-                                <InputLabel id="event-type-label">
-                                    Type
-                                </InputLabel>
-                                <Select
-                                    labelId="event-type-label"
-                                    value={eventType}
-                                    label="Type"
-                                    onChange={(e) =>
-                                        setEventType(e.target.value)
-                                    }
-                                >
-                                    {eventTypes.map((eventTypeItem) => (
-                                        <MenuItem
-                                            key={eventTypeItem.type}
-                                            value={eventTypeItem.type}
-                                        >
-                                            {toTitleCase(eventTypeItem.type)}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
-                            </FormControl>
-                            <TextField
-                                variant="outlined"
-                                label="Description"
-                                multiline
-                                maxRows={4}
-                                rows={2}
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                            />
-
-                            {/* DatePicker */}
-                            <Box sx={{display:'flex',flexDirection:'row',gap:1}}>
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
-                                    label="Start Date"
+                                    label="When"
                                     value={selectedStartDate}
                                     onChange={(newValue) =>
                                         setSelectedStartDate(newValue)
@@ -157,7 +187,7 @@ export default function CreateEvent() {
                             {/* DatePicker */}
                             <LocalizationProvider dateAdapter={AdapterDayjs}>
                                 <DatePicker
-                                    label="End Date"
+                                    label="Until"
                                     value={selectedEndDate}
                                     onChange={(newValue) =>
                                         setSelectedEndDate(newValue)
@@ -167,18 +197,22 @@ export default function CreateEvent() {
                                     )}
                                 />
                             </LocalizationProvider>
-                            </Box>
-
-                            <Button
-                                variant="contained"
-                                disabled={
-                                    !eventName || !eventType || !selectedDate
-                                }
-                                onClick={handleSubmit}
-                            >
-                                Create Event
-                            </Button>
                         </Box>
+
+                        <Button
+                            variant="contained"
+                            disabled={
+                                !eventName ||
+                                !eventType ||
+                                !selectedStartDate ||
+                                !selectedEndDate ||
+                                !eventLocation
+                            }
+                            onClick={handleSubmit}
+                        >
+                            Create Event
+                        </Button>
+                    </Box>
                 </Box>
             </Modal>
         </Box>
