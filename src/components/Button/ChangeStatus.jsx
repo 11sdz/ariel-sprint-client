@@ -8,7 +8,7 @@ import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 
 import { useApi } from "../../hooks/useApi";
 
-export default function ChangeStatus({ eventId, id, status, email, phone }) {
+export default function ChangeStatus({ eventId, id, status, email, phone,onStatusChange }) {
     const { mutate } = useApi(`/api/events/${eventId}/participants/${id}`, {
         method: "PATCH",
         immediate: false,
@@ -16,6 +16,7 @@ export default function ChangeStatus({ eventId, id, status, email, phone }) {
 
     const handleStatusChange = async (newStatus) => {
         await mutate({ status: newStatus });
+        if(onStatusChange) onStatusChange()
     };
 
     const handleSendEmail = () => {

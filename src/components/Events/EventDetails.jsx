@@ -16,6 +16,7 @@ import {
 } from "../../utils/Dashboard/eventsUtils";
 import { useApi } from "../../hooks/useApi";
 import { useNavigate } from "react-router-dom";
+import { truncateText } from "../../utils/textUtils";
 
 export default function EventDetails({ id }) {
     const { data: eventDay } = useApi(`/api/events/${id}`);
@@ -87,7 +88,7 @@ export default function EventDetails({ id }) {
                                 color: "text.secondary",
                             }}
                         >
-                            “{eventDay?.descriptions}”
+                            “{truncateText( eventDay?.descriptions,60)}”
                         </Typography>
                     </Paper>
 

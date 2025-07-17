@@ -30,7 +30,7 @@ export default function ProfileCard({ profileData }) {
             <Box className={styles.profileCard} onClick={() => setFlipped(!flipped)}>
                 {!flipped ? (
                     <>
-                        {(profileData.fullName || profileData.profile_img) && (
+                        {(profileData.full_name || profileData.profile_img) && (
                             <ProfileImage src={profileData.profile_img} fullName={profileData.full_name} />
                         )}
                         <Box

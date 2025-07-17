@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import DashboardCard from "../../Dashboard/DashboardCard";
-import styles from "./style.module.scss";
 import { members } from "../Members/members";
-import GenderPieChart from "../../components/charts/GenderPieChart";
 import { Box, Typography } from "@mui/material";
-import SummaryChart from "../../components/charts/SummaryChart";
-import MyCalendar from "../../components/Calendar/MyCalendar";
-import UpcomingEvent from "../../components/Calendar/UpcomingEvent";
-import { mockEvents } from "../../components/Calendar/events";
-import CreateEvent from "../../components/Calendar/CreateEvent";
 import { useApi } from "../../hooks/useApi";
 import EventDetails from "../../components/Events/EventDetails";
-import { getEventsForDate } from "../../utils/Dashboard/eventsUtils";
+
+import ExploreIcon from "@mui/icons-material/Explore";
+import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 
 const dummyCommunityData = {
     title: "Community Engagement",
@@ -53,6 +47,20 @@ export default function index() {
                 gap: 2,
             }}
         >
+            <Box
+                sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    mb: 3,
+                }}
+            >
+                <TravelExploreIcon color="primary" fontSize="large" />
+                <Typography variant="h4" component="h1" fontWeight="bold">
+                    Discover All Events
+                </Typography>
+                <ExploreIcon color="secondary" fontSize="large" />
+            </Box>
             <Box
                 sx={{
                     display: "flex",

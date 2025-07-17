@@ -17,7 +17,8 @@ import ChangeStatus from "../Button/ChangeStatus";
 
 export default function EventParticipantsTable({
     participants = [],
-    eventId
+    eventId,
+    onStatusChange
 }) {
     if (!participants.length) {
         return (
@@ -84,8 +85,8 @@ export default function EventParticipantsTable({
                                         </Typography>
                                     </Stack>
                                 </TableCell>
-                                <TableCell>
-                                    <ChangeStatus eventId={eventId} id={p.id} status={p.status} email={p.member.email} phone={p.member.phone}/>
+                                <TableCell key={p.status}>
+                                    <ChangeStatus onStatusChange={onStatusChange} eventId={eventId} id={p.id} status={p.status} email={p.member.email} phone={p.member.phone}/>
                                 </TableCell>
                             </TableRow>
                         );
