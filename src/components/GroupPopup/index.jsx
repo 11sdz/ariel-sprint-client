@@ -8,8 +8,6 @@ export default function GroupPopup({ open, onClose }) {
         description: '',
     });
 
-    // const [requestBody, setRequestBody] = useState(null);
-
     const { data: groupsData, loading: groupsLoading, error: groupsError, refetch } = useApi('/api/groups', {
       method: 'POST',
       body: formData,

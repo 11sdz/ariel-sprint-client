@@ -5,7 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Dashboard'
 import Members from './pages/Members'
 import Profile from './pages/Profile'
-import Login from './pages/Login/Login'
+import Login from './pages/Login/index'
 import LinkedInCallback from './pages/LinkedInCallback/LinkedInCallback'
 import Register from './pages/Register'
 import Connections from './pages/Connections'

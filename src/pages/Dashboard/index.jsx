@@ -42,8 +42,6 @@ export default function index() {
             refetch: refetchEvents,
         } = useApi('/api/events');
 
-    console.log(eventsData,"THIS IS EVENTS DATA");
-
     return (
         <Box
             sx={{

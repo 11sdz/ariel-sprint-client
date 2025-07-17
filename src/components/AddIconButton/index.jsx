@@ -4,14 +4,14 @@ import styles from './style.module.scss';
 import { Button, Tooltip } from '@mui/material';
 import GroupPopup from '../GroupPopup';
 
-export default function AddButton() {
+export default function AddIconButton({ title, PopupComponent, popupProps = {}, iconSize = 20 }) {
     const [open, setOpen] = useState(false);
 
     return (
         <div className={styles.addContainer}>
-            <Tooltip title="Create new group" placement="bottom-end" arrow>
+            <Tooltip title={title} placement='bottom-end' arrow>
                 <Button
-                    size="small"
+                    size='small'
                     sx={{
                         minWidth: 'unset',
                         lineHeight: 1,
@@ -21,11 +21,10 @@ export default function AddButton() {
                     }}
                     onClick={() => setOpen(true)}
                 >
-                    <IoIosAddCircle className={styles.addIcon} size={20} />
+                    <IoIosAddCircle size={iconSize} />
                 </Button>
             </Tooltip>
-
-            <GroupPopup open={open} onClose={() => setOpen(false)} />
+            {PopupComponent && <PopupComponent open={open} onClose={() => setOpen(false)} {...popupProps} />}{' '}
         </div>
     );
 }
