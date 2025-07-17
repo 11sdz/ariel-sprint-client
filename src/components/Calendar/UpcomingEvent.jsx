@@ -2,14 +2,15 @@ import React from "react";
 import { getNextUpcomingEvent } from "../../utils/Dashboard/eventsUtils";
 import { Box, Paper, Typography } from "@mui/material";
 
-export default function UpcomingEvent({ events }) {
+export default function UpcomingEvent({ events,setDay }) {
     if(!events){
         return 
     }
+
     const { nextEvent, daysUntil } = getNextUpcomingEvent(events);
 
     return (
-        <Box>
+        <Box onClick={()=>setDay(nextEvent)}>
             <Paper
                 sx={{
                     textAlign: "center",
