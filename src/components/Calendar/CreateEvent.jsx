@@ -64,9 +64,9 @@ export default function CreateEvent() {
         };
 
 
-        setNewEvent(eventData); // optional
+        // setNewEvent(eventData); // optional
 
-        createEvent(newEvent); // dynamic mutation
+        createEvent(eventData); // dynamic mutation
     }
 
     return (
