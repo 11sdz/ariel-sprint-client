@@ -43,6 +43,13 @@ th {
     z-index: 2;
 }
 
+.tableContainer th:last-child,
+.tableContainer td:last-child {
+//   width: 30px;
+//   white-space: nowrap;
+}
+
+
 .memberContainer{
     display: flex;
     flex-direction: row;

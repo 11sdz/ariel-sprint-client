@@ -3,6 +3,8 @@ import { Box } from '@mui/material';
 import TagFilterGroup from '../TagFilterGroup';
 import SearchBar from '../SearchBar/index';
 import styles from './style.module.scss';
+import AddIconButton from '../AddIconButton/index';
+import GroupPopup from '../GroupPopup';
 
 export default function FilterSidebar({ selected, setSelected, label = 'Groups', options = [] }) {
     const [query, setQuery] = useState('');
@@ -23,8 +25,11 @@ export default function FilterSidebar({ selected, setSelected, label = 'Groups',
                     overflowY: 'auto',
                 }}
             >
-                <SearchBar query={query} setQuery={setQuery} placeholder={'Search group name..'}/>
-                <TagFilterGroup  options={filteredOptions} selected={selected} onChange={setSelected} />
+                <div className={styles.topSideBar}>
+                    <SearchBar query={query} setQuery={setQuery} placeholder={'Search group name'} />
+                    <AddIconButton title='Create new group' PopupComponent={GroupPopup} />
+                </div>
+                <TagFilterGroup options={filteredOptions} selected={selected} onChange={setSelected} />
             </Box>
         </div>
     );

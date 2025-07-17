@@ -79,7 +79,7 @@ export default function index() {
                             />
                         </div>
                     </div>
-                    <MembersTable membersResult={results} />
+                    <MembersTable membersResult={results} onGroupsUpdated={refetchMembers} />
                 </div>
             </div>
             <div className={styles.sidebar}>

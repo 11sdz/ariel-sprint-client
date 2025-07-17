@@ -2,11 +2,15 @@ import React from "react";
 import { getNextUpcomingEvent } from "../../utils/Dashboard/eventsUtils";
 import { Box, Paper, Typography } from "@mui/material";
 
-export default function UpcomingEvent({ events }) {
+export default function UpcomingEvent({ events,setDay }) {
+    if(!events){
+        return 
+    }
+
     const { nextEvent, daysUntil } = getNextUpcomingEvent(events);
 
     return (
-        <Box>
+        <Box onClick={()=>setDay(nextEvent)}>
             <Paper
                 sx={{
                     textAlign: "center",
@@ -22,10 +26,13 @@ export default function UpcomingEvent({ events }) {
                 <Typography sx={{ fontWeight: "bolder" }}>
                     Upcoming Event
                 </Typography>
-                <Typography sx={{ fontSize: 15, fontWeight: "bolder" }}>
-                    {nextEvent?.title}
+                <Typography sx={{ fontSize: 15, fontWeight: "bolder" , color:'#2600feff'}}>
+                    {nextEvent?.event_name}
                 </Typography>
-                <Typography sx={{ fontSize: 80 }}>{daysUntil}</Typography>
+                <Typography sx={{ fontSize: 60 }}>{daysUntil}</Typography>
+                <Typography sx={{ fontSize: 15, fontWeight: "bolder" }}>
+                    Days
+                </Typography>
             </Paper>
         </Box>
     );
