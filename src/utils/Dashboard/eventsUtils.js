@@ -78,3 +78,18 @@ export function getCoverURL(k) {
     const coverURL = ["https://i.imgur.com/bueCEF8.png","https://i.imgur.com/Ab94jXb.png","https://i.imgur.com/VoEbc7P.png","https://i.imgur.com/JVrU31v.png"];
     return coverURL[k%4]
 }
+
+export function formatRange(start, end) {
+    const startDate = dayjs(start);
+    const endDate = dayjs(end);
+
+    if (startDate.isSame(endDate, 'day')) {
+        return startDate.format("MMMM D, YYYY"); // e.g. "July 17, 2025"
+    }
+
+    if (startDate.isSame(endDate, 'month')) {
+        return `${startDate.format("MMMM D")} – ${endDate.format("D, YYYY")}`;
+    }
+
+    return `${startDate.format("MMMM D")} – ${endDate.format("MMMM D, YYYY")}`;
+}

@@ -68,20 +68,10 @@ export default function index() {
                                 width: "310px", // fixed width
                             }}
                         >
-                            <EventDetails eventDay={communityEvent} />
+                            <EventDetails id={communityEvent.id} />
                         </Box>
                     ))}
             </Box>
-            <Typography variant="h5">
-                Tmrw: Attendence Accepted/Interested - Maybe - Cant (show nice
-                with grouped avatars of members)
-                <br />
-                Discovery: users can watch upcoming events as Cards or something
-                and signup
-                <br />
-                server and backend data
-                <br />
-            </Typography>
         </Box>
     );
 }
