@@ -1,19 +1,35 @@
-import { alpha, Box, Paper, Typography, CardMedia } from "@mui/material";
+import {
+    alpha,
+    Box,
+    Paper,
+    Typography,
+    CardMedia,
+    Avatar,
+    AvatarGroup,
+    Tooltip,
+} from "@mui/material";
 import React from "react";
 import {
     formatDateShort,
+    formatRange,
     getColorForType,
 } from "../../utils/Dashboard/eventsUtils";
+import { useApi } from "../../hooks/useApi";
 
-export default function EventDetails({ eventDay }) {
+export default function EventDetails({ id }) {
+    const { data: eventDay } = useApi(`/api/events/${id}`);
+
+    if (!eventDay) return null; // or show a loader/spinner
+
     const bgColor = alpha(getColorForType(eventDay?.type) || "#000", 0.2); // 20% opacity
     return (
         <Paper
             sx={{
-                p: 2,
+                p: 3,
                 borderRadius: 4,
                 boxShadow: 3,
-                maxWidth: "25%",
+                height: 370,
+                width: 310,
                 bgcolor: bgColor,
             }}
         >
@@ -26,25 +42,77 @@ export default function EventDetails({ eventDay }) {
                             alt={eventDay.event_name}
                             sx={{
                                 borderRadius: 2,
-                                height:120,
-                                width:'100%',
+                                height: 120,
+                                width: "90%",
                                 objectFit: "cover",
-                                
                             }}
                         />
                     )}
-                    <Typography variant="h5" color="initial">
+                    <Typography
+                        variant="h6"
+                        color="initial"
+                        sx={{ fontWeight: "bolder" }}
+                    >
                         {eventDay?.event_name}
                     </Typography>
-                    <Typography variant="h6" color="initial">
-                        {formatDateShort(eventDay?.start_date)} to{" "}
-                        {formatDateShort(eventDay.end_date)}
+                    <Typography variant="subtitle1" sx={{ color: "#474747" }}>
+                        {formatRange(eventDay?.start_date, eventDay?.end_date)}
                     </Typography>
-                    <Typography variant="h6" color="initial">
-                        {'"'}
-                        {eventDay?.descriptions}
-                        {'"'}
-                    </Typography>
+                    <Paper
+                        elevation={0.5}
+                        sx={{
+                            bgcolor: "#b2b2b24f",
+                            fontStyle: "italic",
+                        }}
+                    >
+                        <Typography
+                            variant="subtitle1"
+                            sx={{
+                                fontWeight: 500,
+                                fontStyle: "italic",
+                                color: "text.secondary",
+                            }}
+                        >
+                            “{eventDay?.descriptions}”
+                        </Typography>
+                    </Paper>
+
+                    <Box
+                        sx={{
+                            display: "flex",
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            mt:1
+                        }}
+                    >
+                        <Typography
+                            variant="body1"
+                            color="initial"
+                            sx={{ color: "#006affff", cursor: "pointer" }}
+                        >
+                            eventlink.co.il
+                        </Typography>
+                        <AvatarGroup max={4}>
+                            {eventDay.participants?.map((p) => (
+                                <>
+                                    {p.status === "Coming" && (
+                                        <Tooltip
+                                            key={p.id}
+                                            title={p.member.full_name}
+                                            arrow
+                                        >
+                                            <Avatar
+                                                alt={p.member.full_name}
+                                                src={p.member.profile_img}
+                                                sx={{ cursor: "pointer" }}
+                                            />
+                                        </Tooltip>
+                                    )}
+                                </>
+                            ))}
+                        </AvatarGroup>
+                    </Box>
                 </Box>
             </Box>
         </Paper>

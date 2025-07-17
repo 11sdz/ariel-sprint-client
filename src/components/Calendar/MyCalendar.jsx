@@ -16,7 +16,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { mockEvents } from "./events";
-import { getColorForType, getEventsForDate } from "../../utils/Dashboard/eventsUtils";
+import {
+    getColorForType,
+    getEventsForDate,
+} from "../../utils/Dashboard/eventsUtils";
 
 const formatDay = (day, selectedDate) => ({
     textAlign: "center",
@@ -50,7 +53,10 @@ const eventColors = {
  *
  */
 
-export default function UnifiedWeekMonthCalendar({ events = mockEvents,setDay }) {
+export default function UnifiedWeekMonthCalendar({
+    events = mockEvents,
+    setDay,
+}) {
     const [selectedDate, setSelectedDate] = useState(dayjs());
     const [selectedEvent, setSelectedEvent] = useState();
 
@@ -61,20 +67,20 @@ export default function UnifiedWeekMonthCalendar({ events = mockEvents,setDay })
 
     function handleBackward() {
         setSelectedDate((prev) => prev.subtract(7, "day"));
-        setSelectedEvent(getEventsForDate(selectedDate,events)[0])
+        setSelectedEvent(getEventsForDate(selectedDate, events)[0]);
     }
 
     function handleForward() {
         setSelectedDate((prev) => prev.add(7, "day"));
-        setSelectedEvent(getEventsForDate(selectedDate,events)[0])
+        setSelectedEvent(getEventsForDate(selectedDate, events)[0]);
     }
 
     function handleSelectDay(date) {
         setSelectedDate(date);
-        setDay(date)
+        setDay(date);
 
         // Find event(s) on the selected date (you can pick first, or all)
-        const eventsForDay = getEventsForDate(date,events)
+        const eventsForDay = getEventsForDate(date, events);
 
         if (eventsForDay.length > 0) {
             // If multiple events, pick the first or handle as you want
@@ -104,10 +110,20 @@ export default function UnifiedWeekMonthCalendar({ events = mockEvents,setDay })
                         height: 60,
                     }}
                 >
-                    <Typography variant="subtitle1" sx={{fontFamily:"Poppins",fontSize:'1.1rem'}}>
+                    <Typography
+                        variant="subtitle1"
+                        sx={{ fontFamily: "Poppins", fontSize: "1.1rem" }}
+                    >
                         {selectedDate.format("dddd, MMM D")}{" "}
                     </Typography>
-                    <Typography variant="subtitle1" sx={{fontFamily:"Poppins",fontWeight:'bold',fontSize:'1.1rem'}}>
+                    <Typography
+                        variant="subtitle1"
+                        sx={{
+                            fontFamily: "Poppins",
+                            fontWeight: "bold",
+                            fontSize: "1.1rem",
+                        }}
+                    >
                         {selectedEvent?.event_name}
                     </Typography>
                 </Box>
@@ -146,13 +162,37 @@ export default function UnifiedWeekMonthCalendar({ events = mockEvents,setDay })
                                 {/* Event markers */}
                                 <Box sx={{ mt: 0.5 }}>
                                     {eventsForDay.map((event, i) => {
-                                        const color = getColorForType(event.type)
-                                        const start = dayjs(
+                                        const color = getColorForType(
+                                            event.type
+                                        );
+                                        const eventStart = dayjs(
                                             event.start_date
-                                        ).format("HH:mm");
-                                        const end = dayjs(
-                                            event.end_date
-                                        ).format("HH:mm");
+                                        );
+                                        const eventEnd = dayjs(
+                                            event.end_date || event.start_date
+                                        );
+
+                                        const isStartDay = day.isSame(
+                                            eventStart,
+                                            "day"
+                                        );
+                                        const isEndDay = day.isSame(
+                                            eventEnd,
+                                            "day"
+                                        );
+
+                                        const start =
+                                            eventStart.format("HH:mm");
+                                        const end = eventEnd.format("HH:mm");
+
+                                        const timeLabel =
+                                            isStartDay && isEndDay
+                                                ? `${start} - ${end}`
+                                                : isStartDay
+                                                ? `${start} →`
+                                                : isEndDay
+                                                ? `← ${end}`
+                                                : "All day";
 
                                         return (
                                             <Box
@@ -176,7 +216,7 @@ export default function UnifiedWeekMonthCalendar({ events = mockEvents,setDay })
                                                     sx={{ fontSize: "0.7rem" }}
                                                 >
                                                     {event.event_name}
-                                                    <br /> ({start}-{end})
+                                                    <br /> ({timeLabel})
                                                 </Typography>
                                             </Box>
                                         );

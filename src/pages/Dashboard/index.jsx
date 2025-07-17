@@ -61,17 +61,8 @@ export default function index() {
             </Box>
 
             <Box>
-                {eventsData && getEventsForDate(day,eventsData)[0] && <EventDetails eventDay={getEventsForDate(day,eventsData)[0]}/>}
+                {eventsData && getEventsForDate(day,eventsData)[0] && <EventDetails id={getEventsForDate(day,eventsData)[0].id}/>}
             </Box>
-            <Typography variant="h5">
-                Tmrw: Attendence Accepted/Interested - Maybe - Cant (show nice with grouped avatars of members)
-                <br/>
-                Discovery: users can watch upcoming events as Cards or something and signup
-                <br/>
-                server and backend data
-                <br/>
-
-            </Typography>
 
 
 

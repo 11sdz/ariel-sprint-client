@@ -11,12 +11,29 @@ export default function Login() {
         const scope = 'openid profile email';
         const authUrl = `https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&state=${state}`;
 
-        // פותח פופאפ
-        const popup = window.open(authUrl, 'LinkedInLogin', 'width=600,height=700');
-        if (!popup) {
-            alert('Popup blocked. Please allow popups and try again.');
-            return;
-        }
+    // מאזין לקוד מהפופאפ
+    const listener = (event) => {
+      if (event.origin !== window.location.origin) return; // הגנה
+      const { code, error } = event.data;
+
+      if (code) {
+        // שלח קוד לשרת
+        fetch('http://localhost:3000/api/auth/linkedin/token', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code }),
+        })
+          .then(r => r.json())
+          .then(data => {
+            // תבצע מה שאתה רוצה עם data (להתחבר, לשמור ב-localStorage, וכו')
+            window.location.href = '/'; // או נווט עם useNavigate
+          });
+      }
+      if (error) {
+        alert('LinkedIn login failed: ' + error);
+      }
+      window.removeEventListener('message', listener); 
+    };
 
         // מאזין לקוד מהפופאפ
         const listener = (event) => {

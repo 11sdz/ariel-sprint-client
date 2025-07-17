@@ -25,13 +25,13 @@ import Lottie from "lottie-react";
 import animationData from "../../assets/Lottie/calendar-booking.json";
 import { useApi } from "../../hooks/useApi";
 
-
-import LooksOneIcon from '@mui/icons-material/LooksOne';
-import LooksTwoIcon from '@mui/icons-material/LooksTwo';
-import Looks3Icon from '@mui/icons-material/Looks3';
-import Looks4Icon from '@mui/icons-material/Looks4';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import LooksOneIcon from "@mui/icons-material/LooksOne";
+import LooksTwoIcon from "@mui/icons-material/LooksTwo";
+import Looks3Icon from "@mui/icons-material/Looks3";
+import Looks4Icon from "@mui/icons-material/Looks4";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import { getCoverURL } from "../../utils/Dashboard/eventsUtils";
 
 export default function CreateEvent() {
     const [openDatePicker, setOpenDatePicker] = useState(false);
@@ -41,12 +41,14 @@ export default function CreateEvent() {
     const [description, setDescription] = useState("");
     const [selectedStartDate, setSelectedStartDate] = useState(dayjs());
     const [selectedEndDate, setSelectedEndDate] = useState(dayjs());
-    const [coverImage, setCoverImage] = useState("");
+    const [coverImage, setCoverImage] = useState(null);
     const [newEvent, setNewEvent] = useState(null);
 
-    function handleSetCoverImage(){
-        setCoverImage('')
-    }
+    const handleSetCoverImage = (event, newValue) => {
+        if (newValue !== null) {
+            setCoverImage(getCoverURL(newValue));
+        }
+    };
 
     function handleCloseDatePicker() {
         setOpenDatePicker(false);
@@ -62,6 +64,7 @@ export default function CreateEvent() {
         error: postError,
         isLoading: isPosting,
     } = useApi("/api/events", {
+        immediate: false,
         method: "POST",
     });
 
@@ -75,18 +78,21 @@ export default function CreateEvent() {
             start_date: selectedStartDate.toISOString(),
             end_date: selectedEndDate.toISOString(),
             location: eventLocation,
+            event_img: getCoverURL(coverImage),
         };
+
+        console.log(coverImage);
 
         setNewEvent(eventData); // optional, for UI preview or debug
 
-        createEvent(eventData); // dynamic mutation
+        createEvent(newEvent); // dynamic mutation
 
         // ✅ Reset form fields after submission
         setEventName("");
         setEventType("");
         setDescription("");
-        setSelectedStartDate(null);
-        setSelectedEndDate(null);
+        setSelectedStartDate(dayjs());
+        setSelectedEndDate(dayjs());
         setEventLocation("");
     }
 
@@ -145,38 +151,42 @@ export default function CreateEvent() {
                         }}
                     >
                         <Paper>
-                            <Lottie animationData={animationData} />
+                            {coverImage === null || coverImage === undefined ? (
+                                <Lottie animationData={animationData} />
+                            ) : (
+                                <CardMedia
+                                    component="img"
+                                    image={coverImage}
+                                    alt="Cover"
+                                    sx={{
+                                        width: "100%",
+                                        height: 120,
+                                        objectFit: "cover",
+                                        borderRadius: 2,
+                                    }}
+                                />
+                            )}
                         </Paper>
                         <ToggleButtonGroup
                             value={coverImage}
                             exclusive
                             onChange={handleSetCoverImage}
-                            aria-label="text alignment"
-                            sx={{justifyContent:'center'}}
+                            aria-label="cover image selector"
+                            sx={{ justifyContent: "center" }}
                         >
-                            <ToggleButton
-                                value="left"
-                                aria-label="left aligned"
-                            >
+                            <ToggleButton value={0} aria-label="cover 1">
                                 <LooksOneIcon />
                             </ToggleButton>
-                            <ToggleButton value="center" aria-label="centered">
+                            <ToggleButton value={1} aria-label="cover 2">
                                 <LooksTwoIcon />
                             </ToggleButton>
-                            <ToggleButton
-                                value="right"
-                                aria-label="right aligned"
-                            >
+                            <ToggleButton value={2} aria-label="cover 3">
                                 <Looks3Icon />
                             </ToggleButton>
-                            <ToggleButton
-                                value="justify"
-                                aria-label="justified"
-                            >
+                            <ToggleButton value={3} aria-label="cover 4">
                                 <Looks4Icon />
                             </ToggleButton>
                         </ToggleButtonGroup>
-
                         <TextField
                             variant="outlined"
                             label="Event Name"
@@ -196,6 +206,13 @@ export default function CreateEvent() {
                                 value={eventType}
                                 label="Type"
                                 onChange={(e) => setEventType(e.target.value)}
+                                MenuProps={{
+                                    PaperProps: {
+                                        style: {
+                                            maxHeight: 300, // You can adjust this value
+                                        },
+                                    },
+                                }}
                             >
                                 {eventTypes.map((eventTypeItem) => (
                                     <MenuItem
@@ -216,7 +233,6 @@ export default function CreateEvent() {
                             value={description}
                             onChange={(e) => setDescription(e.target.value)}
                         />
-
                         {/* DatePicker */}
                         <Box
                             sx={{
@@ -258,7 +274,6 @@ export default function CreateEvent() {
                                 />
                             </LocalizationProvider>
                         </Box>
-
                         <Button
                             variant="contained"
                             disabled={

@@ -11,6 +11,7 @@ import Register from './pages/Register'
 import Connections from './pages/Connections'
 import Discover from './pages/Discover'
 import AiMatching from './pages/AiMatching'
+import Event from './pages/Event'
 
 import { Box, useMediaQuery, useTheme } from '@mui/material';
 
@@ -35,6 +36,7 @@ export default function App() {
                         <Route path='/connections' element={<Connections />} />
                         <Route path='/discover' element={<Discover />} />
                         <Route path='/aiMatching' element={<AiMatching />} />
+                        <Route path='/event/:id' element={<Event />} />
                     </Route>
                 </Routes>
             </BrowserRouter>
