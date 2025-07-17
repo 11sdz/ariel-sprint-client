@@ -15,11 +15,18 @@ import {
     getColorForType,
 } from "../../utils/Dashboard/eventsUtils";
 import { useApi } from "../../hooks/useApi";
+import { useNavigate } from "react-router-dom";
 
 export default function EventDetails({ id }) {
     const { data: eventDay } = useApi(`/api/events/${id}`);
 
+    const nav = useNavigate();
+
     if (!eventDay) return null; // or show a loader/spinner
+
+    function handleOpenEventPage(id) {
+        nav(`/event/${id}`);
+    }
 
     const bgColor = alpha(getColorForType(eventDay?.type) || "#000", 0.2); // 20% opacity
     return (
@@ -33,7 +40,14 @@ export default function EventDetails({ id }) {
                 bgcolor: bgColor,
             }}
         >
-            <Box sx={{ display: "flex", flexDirection: "row" }}>
+            <Box
+                sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    cursor: "pointer",
+                }}
+                onClick={() => handleOpenEventPage(id)}
+            >
                 <Box>
                     {eventDay?.event_img && (
                         <CardMedia
@@ -83,7 +97,7 @@ export default function EventDetails({ id }) {
                             flexDirection: "row",
                             justifyContent: "space-between",
                             alignItems: "center",
-                            mt:1
+                            mt: 1,
                         }}
                     >
                         <Typography
@@ -94,23 +108,25 @@ export default function EventDetails({ id }) {
                             eventlink.co.il
                         </Typography>
                         <AvatarGroup max={4}>
-                            {eventDay.participants?.map((p) => (
-                                <>
-                                    {p.status === "Coming" && (
-                                        <Tooltip
-                                            key={p.id}
-                                            title={p.member.full_name}
-                                            arrow
-                                        >
-                                            <Avatar
-                                                alt={p.member.full_name}
-                                                src={p.member.profile_img}
-                                                sx={{ cursor: "pointer" }}
-                                            />
-                                        </Tooltip>
-                                    )}
-                                </>
-                            ))}
+                            {eventDay.participants?.map((p) => {
+                                return (
+                                    <>
+                                        {p.status === "coming" && (
+                                            <Tooltip
+                                                key={p.id}
+                                                title={p.member.full_name}
+                                                arrow
+                                            >
+                                                <Avatar
+                                                    alt={p.member.full_name}
+                                                    src={p.member.profile_img}
+                                                    sx={{ cursor: "pointer" }}
+                                                />
+                                            </Tooltip>
+                                        )}
+                                    </>
+                                );
+                            })}
                         </AvatarGroup>
                     </Box>
                 </Box>

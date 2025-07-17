@@ -68,7 +68,8 @@ export default function ProfileCard({ profileData }) {
                                 <span>
                                     <LocationOnIcon sx={{ my: -1 }} />
                                     {/* {profileData.location.country} */}
-                                    {profileData.city && `, ${profileData.city}`}
+                                    {/*profileData.city && `, ${profileData.city}`*/}
+                                    {profileData.city}
                                 </span>
                             </span>
                         </Box>
@@ -97,9 +98,7 @@ export default function ProfileCard({ profileData }) {
                                 fontWeight: 'bolder',
                             }}
                         >
-                            {'"'}
-                            {'"'}{profileData.additionalInfo}{'"'}
-                            {'"'}
+                            {'"'}{profileData.additional_info}{'"'}
                         </span>
                         <span
                             className={styles.details}
