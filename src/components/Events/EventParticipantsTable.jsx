@@ -13,10 +13,11 @@ import {
     Tooltip,
     Button,
 } from "@mui/material";
+import ChangeStatus from "../Button/ChangeStatus";
 
 export default function EventParticipantsTable({
     participants = [],
-    onStatusChange,
+    eventId
 }) {
     if (!participants.length) {
         return (
@@ -25,11 +26,6 @@ export default function EventParticipantsTable({
             </Typography>
         );
     }
-
-    const handleToggleStatus = (p) => {
-        const newStatus = p.status === "coming" ? "pending" : "coming";
-        if (onStatusChange) onStatusChange(p.id, newStatus);
-    };
 
     return (
         <TableContainer
@@ -40,13 +36,13 @@ export default function EventParticipantsTable({
                 <TableHead>
                     <TableRow sx={{ backgroundColor: "#f4f6f8" }}>
                         <TableCell>
-                            <strong>Participant</strong>
+                            <Typography variant="h6">Participant</Typography>
                         </TableCell>
-                        <TableCell>
-                            <strong>Contact</strong>
+                        <TableCell >
+                            <Typography variant="h6">Contact</Typography>
                         </TableCell>
-                        <TableCell>
-                            <strong>Status Action</strong>
+                        <TableCell >
+                            <Typography variant="h6">Status Action</Typography>
                         </TableCell>
                     </TableRow>
                 </TableHead>
@@ -70,18 +66,18 @@ export default function EventParticipantsTable({
                                                 src={member?.profile_img}
                                             />
                                         </Tooltip>
-                                        <Typography variant="subtitle2">
+                                        <Typography variant="h6">
                                             {member?.full_name || "—"}
                                         </Typography>
                                     </Stack>
                                 </TableCell>
                                 <TableCell>
                                     <Stack spacing={0.5}>
-                                        <Typography variant="body2">
+                                        <Typography variant="subtitle1">
                                             {member?.email || "—"}
                                         </Typography>
                                         <Typography
-                                            variant="body2"
+                                            variant="subtitle1"
                                             color="text.secondary"
                                         >
                                             {member?.phone || "—"}
@@ -89,24 +85,7 @@ export default function EventParticipantsTable({
                                     </Stack>
                                 </TableCell>
                                 <TableCell>
-                                    <Button
-                                        variant={
-                                            status === "coming"
-                                                ? "contained"
-                                                : "outlined"
-                                        }
-                                        color={
-                                            status === "coming"
-                                                ? "success"
-                                                : "warning"
-                                        }
-                                        onClick={() => handleToggleStatus(p)}
-                                        size="small"
-                                    >
-                                        {status === "coming"
-                                            ? "Coming"
-                                            : "Pending"}
-                                    </Button>
+                                    <ChangeStatus eventId={eventId} id={p.id} status={p.status} email={p.member.email} phone={p.member.phone}/>
                                 </TableCell>
                             </TableRow>
                         );

@@ -3,6 +3,8 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useApi } from "../../hooks/useApi";
 import EventParticipantsTable from "../../components/Events/EventParticipantsTable";
+import { useState } from "react";
+import { formatRange } from "../../utils/Dashboard/eventsUtils";
 
 export default function EventPage() {
     const { id } = useParams();
@@ -10,11 +12,11 @@ export default function EventPage() {
 
     if (!eventDay) return <Box>Didnt find any event</Box>;
     return (
-        <Box sx={{p:3}}>
+        <Box sx={{ p: 3 }}>
             {/* Cover Image */}
             <Box
                 sx={{
-                    height: 220,
+                    height: 240,
                     backgroundImage: `url(${eventDay.event_img})`, // Replace with your eventDay.event_img
                     backgroundSize: "cover",
                     backgroundPosition: "center",
@@ -39,15 +41,56 @@ export default function EventPage() {
                         borderRadius: 4,
                     }}
                 />
-                <Typography
-                    variant="h4"
-                    sx={{ position: "relative", zIndex: 1, fontWeight:'bolder' }}
-                >
-                    {eventDay.event_name}
-                </Typography>
+                <Box>
+                    <Typography
+                        variant="h4"
+                        sx={{
+                            position: "relative",
+                            zIndex: 1,
+                            fontWeight: "bolder",
+                        }}
+                    >
+                        {eventDay.event_name}
+                    </Typography>
+                    <Typography
+                        variant="h6"
+                        sx={{
+                            position: "relative",
+                            zIndex: 1,
+                            fontWeight: "bolder",
+                        }}
+                    >
+                        {formatRange(eventDay?.start_date, eventDay?.end_date)}
+                    </Typography>
+                </Box>
             </Box>
 
-            <EventParticipantsTable participants={eventDay.participants}/>
+            {/* Event Description */}
+            {eventDay.descriptions && (
+                <Box
+                    sx={{
+                        mb: 4,
+                        p: 3,
+                        borderRadius: 3,
+                        backgroundColor: "background.paper",
+                        boxShadow: 1,
+                        color: "text.primary",
+                        whiteSpace: "pre-line", // respects line breaks if any
+                        fontSize: 16,
+                        lineHeight: 1.5,
+                    }}
+                >
+                    <Typography variant="h6" gutterBottom fontWeight="bold">
+                        About this event
+                    </Typography>
+                    <Typography>{eventDay.descriptions}</Typography>
+                </Box>
+            )}
+
+            <EventParticipantsTable
+                participants={eventDay.participants}
+                eventId={eventDay.id}
+            />
         </Box>
     );
 }
