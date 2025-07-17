@@ -8,7 +8,11 @@ import { formatRange } from "../../utils/Dashboard/eventsUtils";
 
 export default function EventPage() {
     const { id } = useParams();
-    const { data: eventDay } = useApi(`/api/events/${id}`);
+    const { data: eventDay , refetch } = useApi(`/api/events/${id}`);
+    const handleStatusChange= async ()=>{
+        refetch()
+
+    }
 
     if (!eventDay) return <Box>Didnt find any event</Box>;
     return (
@@ -90,6 +94,7 @@ export default function EventPage() {
             <EventParticipantsTable
                 participants={eventDay.participants}
                 eventId={eventDay.id}
+                onStatusChange={handleStatusChange}
             />
         </Box>
     );

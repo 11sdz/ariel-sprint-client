@@ -58,7 +58,7 @@ export default function MembersTable({ membersResult, onGroupsUpdated }) {
                                         >
                                             <div className={styles.profileImg}>
                                                 <ProfileImage
-                                                    initials={getInitials(item.fullName)}
+                                                    initials={getInitials(item.full_name)}
                                                     src={item.profile_img}
                                                     width={'25px'}
                                                     height={'25px'}
