@@ -6,6 +6,7 @@ export default function UpcomingEvent({ events,setDay }) {
     if(!events){
         return 
     }
+
     const { nextEvent, daysUntil } = getNextUpcomingEvent(events);
 
     return (

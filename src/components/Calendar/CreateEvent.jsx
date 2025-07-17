@@ -46,7 +46,7 @@ export default function CreateEvent() {
 
     const handleSetCoverImage = (event, newValue) => {
         if (newValue !== null) {
-            setCoverImage(newValue);
+            setCoverImage(getCoverURL(newValue));
         }
     };
 
@@ -64,6 +64,7 @@ export default function CreateEvent() {
         error: postError,
         isLoading: isPosting,
     } = useApi("/api/events", {
+        immediate: false,
         method: "POST",
     });
 
@@ -77,19 +78,21 @@ export default function CreateEvent() {
             start_date: selectedStartDate.toISOString(),
             end_date: selectedEndDate.toISOString(),
             location: eventLocation,
-            event_img: coverImage,
+            event_img: getCoverURL(coverImage),
         };
+
+        console.log(coverImage);
 
         setNewEvent(eventData); // optional, for UI preview or debug
 
-        createEvent(eventData); // dynamic mutation
+        createEvent(newEvent); // dynamic mutation
 
         // ✅ Reset form fields after submission
         setEventName("");
         setEventType("");
         setDescription("");
-        setSelectedStartDate(null);
-        setSelectedEndDate(null);
+        setSelectedStartDate(dayjs());
+        setSelectedEndDate(dayjs());
         setEventLocation("");
     }
 
@@ -153,7 +156,7 @@ export default function CreateEvent() {
                             ) : (
                                 <CardMedia
                                     component="img"
-                                    image={getCoverURL(coverImage)}
+                                    image={coverImage}
                                     alt="Cover"
                                     sx={{
                                         width: "100%",
@@ -203,6 +206,13 @@ export default function CreateEvent() {
                                 value={eventType}
                                 label="Type"
                                 onChange={(e) => setEventType(e.target.value)}
+                                MenuProps={{
+                                    PaperProps: {
+                                        style: {
+                                            maxHeight: 300, // You can adjust this value
+                                        },
+                                    },
+                                }}
                             >
                                 {eventTypes.map((eventTypeItem) => (
                                     <MenuItem
